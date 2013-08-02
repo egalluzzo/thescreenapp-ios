@@ -1,4 +1,5 @@
-thescreenapp-ios
-================
+The Screen App
+==============
 
-An app to help you conduct interviews, for iOS.
+An app to help you conduct interviews.  This is the iOS version.
+
