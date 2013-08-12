@@ -47,8 +47,21 @@
     ScreenAppDelegate *appDelegate = (ScreenAppDelegate *)[[UIApplication sharedApplication] delegate];
     self.managedObjectContext = appDelegate.managedObjectContext;
     
-    // FIXME: Remove this
-    self.candidatesArray = [[NSMutableArray alloc] init];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Candidate" inManagedObjectContext:managedObjectContext];
+    [request setEntity:entity];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:NO];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+    [request setSortDescriptors:sortDescriptors];
+    NSError *error = nil;
+    NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
+    if (mutableFetchResults == nil) {
+        // Handle the error.
+        // FIXME: Handle this better.
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+    [self setCandidatesArray:mutableFetchResults];
 }
 
 - (void)didReceiveMemoryWarning
@@ -143,6 +156,29 @@
      */
 }
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        // Delete the managed object at the given index path.
+        NSManagedObject *candidateToDelete = [candidatesArray objectAtIndex:indexPath.row];
+        [managedObjectContext deleteObject:candidateToDelete];
+        
+        // Update the array and table view.
+        [candidatesArray removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+        
+        // Commit the change.
+        NSError *error = nil;
+        if (![managedObjectContext save:&error]) {
+            // Handle the error.
+            // FIXME: Need a better error handling mechanism...
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        }
+    }
+}
+
 #pragma mark - Managed object CRUD methods
 
 - (void)addCandidate {
@@ -151,6 +187,7 @@
     NSError *error = nil;
     if (![managedObjectContext save:&error]) {
         // FIXME: Handle the error in a better way.
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
     
