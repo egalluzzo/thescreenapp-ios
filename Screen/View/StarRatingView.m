@@ -86,7 +86,6 @@
     if (CGRectContainsPoint(self.bounds, [[[touches allObjects]lastObject] locationInView:self])) {
         
         float xpos = [[[touches allObjects]lastObject] locationInView:self].x - kLeftPadding;
-        int star = MIN(4,xpos/((self.bounds.size.width-kLabelAllowance-kLeftPadding)/5.0f));
         if (xpos < kLeftPadding) {
             if (self.userRating == 20.0f) {
                 self.userRating = 0.0f;
@@ -101,7 +100,10 @@
                 }
             }
         }else{
-            self.userRating = (star+1)*20.0f;
+            float star = MIN(5.0,xpos/((self.bounds.size.width-kLabelAllowance-kLeftPadding)/5.0f));
+            // Round to the nearest half star.
+            star = roundf(star * 2.0f) / 2.0f;
+            self.userRating = star * 20.0f;
             self.rating = self.userRating;
             if (self.label) {
                 self.label.text = [NSString stringWithFormat:@"%d%%",self.rating];
@@ -117,15 +119,11 @@
     if (CGRectContainsPoint(self.bounds, [[[touches allObjects]lastObject] locationInView:self])) {
         
         float xpos = [[[touches allObjects]lastObject] locationInView:self].x - kLeftPadding;
-        int star = MIN(4,xpos/((self.bounds.size.width-kLabelAllowance-kLeftPadding)/5.0f));
-        if (star == 0) {
-            self.userRating = (star+1)*20.0f;
-            self.rating = self.userRating;
-        }else{
-            self.userRating = (star+1)*20.0f;
-            self.rating = self.userRating;
-        }
-        
+        float star = MIN(5.0,xpos/((self.bounds.size.width-kLabelAllowance-kLeftPadding)/5.0f));
+        // Round to the nearest half star.
+        star = roundf(star * 2.0f) / 2.0f;
+        self.userRating = star *20.0f;
+        self.rating = self.userRating;
         
         if (self.label) {
             self.label.text = [NSString stringWithFormat:@"%d%%",self.rating];
