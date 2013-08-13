@@ -27,6 +27,9 @@
 		070053771785CB5F005D947E /* calendar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 070053731785CB5F005D947E /* calendar@2x.png */; };
 		070053781785CB5F005D947E /* people.png in Resources */ = {isa = PBXBuildFile; fileRef = 070053741785CB5F005D947E /* people.png */; };
 		070053791785CB5F005D947E /* people@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 070053751785CB5F005D947E /* people@2x.png */; };
+		0704557017B986C500C42D19 /* StarRatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0704556F17B986C500C42D19 /* StarRatingView.m */; };
+		0704557217BA689F00C42D19 /* 5starsgray.png in Resources */ = {isa = PBXBuildFile; fileRef = 0704557117BA689F00C42D19 /* 5starsgray.png */; };
+		0704557417BA69BF00C42D19 /* 5starflip.png in Resources */ = {isa = PBXBuildFile; fileRef = 0704557317BA69BF00C42D19 /* 5starflip.png */; };
 		07E0E6D5179AE9B000BB29C3 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E0E6D4179AE9B000BB29C3 /* CoreData.framework */; };
 		07E0E6D9179AEA5800BB29C3 /* Screen.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 07E0E6D7179AEA5800BB29C3 /* Screen.xcdatamodeld */; };
 		07E0E6DC179AEDCC00BB29C3 /* Candidate.m in Sources */ = {isa = PBXBuildFile; fileRef = 07E0E6DB179AEDCC00BB29C3 /* Candidate.m */; };
@@ -69,6 +72,10 @@
 		070053731785CB5F005D947E /* calendar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar@2x.png"; sourceTree = "<group>"; };
 		070053741785CB5F005D947E /* people.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = people.png; sourceTree = "<group>"; };
 		070053751785CB5F005D947E /* people@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "people@2x.png"; sourceTree = "<group>"; };
+		0704556E17B986C500C42D19 /* StarRatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StarRatingView.h; path = View/StarRatingView.h; sourceTree = "<group>"; };
+		0704556F17B986C500C42D19 /* StarRatingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StarRatingView.m; path = View/StarRatingView.m; sourceTree = "<group>"; };
+		0704557117BA689F00C42D19 /* 5starsgray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5starsgray.png; sourceTree = "<group>"; };
+		0704557317BA69BF00C42D19 /* 5starflip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5starflip.png; sourceTree = "<group>"; };
 		07E0E6D4179AE9B000BB29C3 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		07E0E6D8179AEA5800BB29C3 /* Screen.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Screen.xcdatamodel; sourceTree = "<group>"; };
 		07E0E6DA179AEDCC00BB29C3 /* Candidate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Candidate.h; path = Model/Candidate.h; sourceTree = "<group>"; };
@@ -183,6 +190,8 @@
 		0700537A1785CCB1005D947E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0704557317BA69BF00C42D19 /* 5starflip.png */,
+				0704557117BA689F00C42D19 /* 5starsgray.png */,
 				070053721785CB5F005D947E /* calendar.png */,
 				070053731785CB5F005D947E /* calendar@2x.png */,
 				070053741785CB5F005D947E /* people.png */,
@@ -206,6 +215,8 @@
 				0700537A1785CCB1005D947E /* Images */,
 				0700533D1779D8A3005D947E /* MainStoryboard_iPhone.storyboard */,
 				070053401779D8A3005D947E /* MainStoryboard_iPad.storyboard */,
+				0704556E17B986C500C42D19 /* StarRatingView.h */,
+				0704556F17B986C500C42D19 /* StarRatingView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -301,6 +312,8 @@
 				070053771785CB5F005D947E /* calendar@2x.png in Resources */,
 				070053781785CB5F005D947E /* people.png in Resources */,
 				070053791785CB5F005D947E /* people@2x.png in Resources */,
+				0704557217BA689F00C42D19 /* 5starsgray.png in Resources */,
+				0704557417BA69BF00C42D19 /* 5starflip.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,6 +353,7 @@
 				07E0E6D9179AEA5800BB29C3 /* Screen.xcdatamodeld in Sources */,
 				07E0E6DC179AEDCC00BB29C3 /* Candidate.m in Sources */,
 				07E0E6E1179B293500BB29C3 /* CandidateTableViewController.m in Sources */,
+				0704557017B986C500C42D19 /* StarRatingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

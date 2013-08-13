@@ -243,30 +243,35 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="XXq-Tx-Nuz" detailTextLabel="k7f-Og-4yY" style="IBUITableViewCellStyleValue2" id="DdN-3D-yxE">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="DdN-3D-yxE">
                                         <rect key="frame" x="0.0" y="143" width="768" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="45" y="0.0" width="678" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="rating" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XXq-Tx-Nuz">
-                                                    <rect key="frame" x="10" y="15" width="67" height="15"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="rating" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oOh-H4-AFn">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="67" id="FCz-K2-OEj"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                                     <color key="textColor" red="0.32156862749999998" green="0.40000000000000002" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="k7f-Og-4yY">
-                                                    <rect key="frame" x="83" y="12" width="41" height="19"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
+                                                <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sVy-cq-KrQ" customClass="StarRatingView">
+                                                    <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                                </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="oOh-H4-AFn" firstAttribute="leading" secondItem="DdN-3D-yxE" secondAttribute="leading" constant="56" id="0b5-ga-5rQ"/>
+                                            <constraint firstItem="sVy-cq-KrQ" firstAttribute="leading" secondItem="DdN-3D-yxE" secondAttribute="leading" constant="128" id="8VM-Y9-Wmg"/>
+                                            <constraint firstItem="sVy-cq-KrQ" firstAttribute="top" secondItem="DdN-3D-yxE" secondAttribute="top" constant="11" id="bkm-LY-htf"/>
+                                            <constraint firstItem="sVy-cq-KrQ" firstAttribute="centerY" secondItem="DdN-3D-yxE" secondAttribute="centerY" type="default" id="iQe-aT-40u"/>
+                                            <constraint firstItem="oOh-H4-AFn" firstAttribute="top" secondItem="DdN-3D-yxE" secondAttribute="top" constant="14" id="kCs-eI-feb"/>
+                                            <constraint firstAttribute="trailing" secondItem="sVy-cq-KrQ" secondAttribute="trailing" constant="440" id="wKC-O3-HkF"/>
+                                        </constraints>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -443,6 +448,9 @@
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="StarRatingView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/StarRatingView.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
