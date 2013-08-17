@@ -35,9 +35,11 @@
 
 - (void)setCandidate:(Candidate *)candidate
 {
-    _candidate = candidate;
-    [self configureView];
-    [[self tableView] reloadData];
+    if (_candidate != candidate) {
+        _candidate = candidate;
+        [self configureView];
+        [[self tableView] reloadData];
+    }
     
     if (self.masterPopoverController != nil) {
         [self.masterPopoverController dismissPopoverAnimated:YES];
@@ -55,6 +57,7 @@
         //    self.phoneField.text = self.candidate.phone;
         self.ratingField.rating = self.candidate.rating.intValue;
     }
+    self.ratingField.userRating = 0;
 }
 
 - (void)viewWillAppear:(BOOL)animated
