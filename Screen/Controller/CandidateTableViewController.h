@@ -17,10 +17,9 @@
     UIBarButtonItem *addButton;
 }
 
-@property (nonatomic, retain) NSMutableArray *candidatesArray;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
-
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+
 @property (nonatomic, retain) CandidateDetailViewController *detailViewController;
 @property (nonatomic, retain) UIBarButtonItem *addButton;
 

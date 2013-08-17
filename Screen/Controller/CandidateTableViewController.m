@@ -16,7 +16,6 @@
 
 @implementation CandidateTableViewController
 
-@synthesize candidatesArray;
 @synthesize managedObjectContext;
 @synthesize addButton;
 
@@ -87,7 +86,7 @@
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return NO;
+    return YES;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -98,7 +97,7 @@
         
         NSError *error = nil;
         if (![context save:&error]) {
-            // FIXME: Handle this better.
+            // FIXME: Handle errors properly.
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }
@@ -158,7 +157,7 @@
     
 	NSError *error = nil;
 	if (![self.fetchedResultsController performFetch:&error]) {
-        // FIXME: Handle this properly.
+        // FIXME: Handle errors properly.
 	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 	    abort();
 	}
@@ -198,6 +197,9 @@
             
         case NSFetchedResultsChangeDelete:
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            if (anObject == self.detailViewController.candidate) {
+                self.detailViewController.candidate = nil;
+            }
             break;
             
         case NSFetchedResultsChangeUpdate:
@@ -236,11 +238,13 @@
     // Save the context.
     NSError *error = nil;
     if (![context save:&error]) {
-        // Replace this implementation with code to handle the error appropriately.
-        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        // FIXME: Handle errors properly.
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
+    
+    [self.tableView selectRowAtIndexPath:[self.fetchedResultsController indexPathForObject:candidate] animated:YES scrollPosition:UITableViewScrollPositionTop];
+    self.detailViewController.candidate = candidate;
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
@@ -254,7 +258,12 @@
     }
     
     Candidate *candidate = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = [candidate fullName];
+    NSString *fullName = candidate.fullName;
+    if ([fullName isEqualToString:@""]) {
+        cell.textLabel.text = @"(no name)";
+    } else {
+        cell.textLabel.text = fullName;
+    }
     cell.detailTextLabel.text = [dateFormatter stringFromDate:[candidate creationDate]];
 }
 

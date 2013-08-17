@@ -33,7 +33,7 @@
 {
     if (self.lastName == nil) {
         if (self.firstName == nil) {
-            return @"(no name)";
+            return @"";
         } else {
             return self.firstName;
         }
