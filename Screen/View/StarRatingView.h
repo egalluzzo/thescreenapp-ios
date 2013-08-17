@@ -10,14 +10,19 @@
 
 #import <UIKit/UIKit.h>
 
-@interface StarRatingView : UIView
-@property (nonatomic) int userRating;
+@class StarRatingView;
 
-@property (nonatomic) int maxrating;
+@protocol StarRatingViewDelegate <NSObject>
+@optional
+- (void) starRatingViewDidChangeRating:(StarRatingView *)starRatingView withRating:(int)rating;
+@end
+
+@interface StarRatingView : UIView
+
+@property (nonatomic, weak) IBOutlet id <StarRatingViewDelegate> delegate;
 @property (nonatomic) int rating;
+@property (nonatomic) int userRating;
 @property (nonatomic) BOOL animated;
-@property (nonatomic) float kLabelAllowance;
-@property (nonatomic,strong) NSTimer* timer;
-@property (nonatomic,strong) UILabel* label;
+
 - (id)initWithFrame:(CGRect)frame andRating:(int)rating withLabel:(BOOL)label animated:(BOOL)animated;
 @end

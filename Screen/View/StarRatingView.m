@@ -8,10 +8,34 @@
 //
 
 #import "StarRatingView.h"
+
 #define kLeftPadding 0.0f
+
+@interface StarRatingView ()
+@property (nonatomic) int maxrating;
+@property (nonatomic) float kLabelAllowance;
+@property (nonatomic,strong) NSTimer* timer;
+@property (nonatomic,strong) UILabel* label;
+@end
+
 @implementation StarRatingView
+
+@synthesize delegate;
 @synthesize timer;
 @synthesize kLabelAllowance;
+
+- (void)setRating:(int)rating
+{
+    _rating = rating;
+    [self setNeedsDisplay];
+}
+
+- (void)setUserRating:(int)userRating
+{
+    _userRating = userRating;
+    [self setNeedsDisplay];
+}
+
 - (id)initWithFrame:(CGRect)frame andRating:(int)rating withLabel:(BOOL)label animated:(BOOL)animated
 {
     self = [super initWithFrame:frame];
@@ -122,15 +146,18 @@
         float star = MIN(5.0,xpos/((self.bounds.size.width-kLabelAllowance-kLeftPadding)/5.0f));
         // Round to the nearest half star.
         star = roundf(star * 2.0f) / 2.0f;
-        self.userRating = star *20.0f;
+        self.userRating = star * 20.0f;
         self.rating = self.userRating;
         
         if (self.label) {
             self.label.text = [NSString stringWithFormat:@"%d%%",self.rating];
         }
         
-        [self setNeedsDisplay];
+        if (delegate != nil && [delegate respondsToSelector:@selector(starRatingViewDidChangeRating:withRating:)]) {
+            [[self delegate] starRatingViewDidChangeRating:self withRating:self.rating];
+        }
         
+        [self setNeedsDisplay];
     }
 }
 

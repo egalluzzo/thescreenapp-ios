@@ -8,6 +8,8 @@
 
 #import "ScreenAppDelegate.h"
 
+#import "CandidateDetailViewController.h"
+
 @implementation ScreenAppDelegate
 
 @synthesize managedObjectContext = _managedObjectContext;
@@ -17,13 +19,19 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    
     NSManagedObjectContext *context = [self managedObjectContext];
     if (!context) {
         // Handle the error.
     }
     // Pass the managed object context to the table view controllers.
 //    rootViewController.managedObjectContext = context;
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+        UISplitViewController *splitViewController = tabBarController.viewControllers[0];
+        UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
+        splitViewController.delegate = (id)navigationController.topViewController;
+    }
 
     return YES;
 }

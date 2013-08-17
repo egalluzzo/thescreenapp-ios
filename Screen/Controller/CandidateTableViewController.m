@@ -44,6 +44,8 @@
                                                               action:@selector(addCandidate)];
     self.navigationItem.rightBarButtonItem = addButton;
     
+    self.detailViewController = (CandidateDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    
     ScreenAppDelegate *appDelegate = (ScreenAppDelegate *)[[UIApplication sharedApplication] delegate];
     self.managedObjectContext = appDelegate.managedObjectContext;
     
@@ -147,6 +149,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    Candidate *candidate = [candidatesArray objectAtIndex:indexPath.row];
+    self.detailViewController.candidate = candidate;
     // Navigation logic may go here. Create and push another view controller.
     /*
      <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];

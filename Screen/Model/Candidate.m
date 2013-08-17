@@ -31,7 +31,19 @@
 
 - (NSString *)fullName
 {
-    return [NSString stringWithFormat:@"%@, %@", self.lastName, self.firstName];
+    if (self.lastName == nil) {
+        if (self.firstName == nil) {
+            return @"(no name)";
+        } else {
+            return self.firstName;
+        }
+    } else {
+        if (self.firstName == nil) {
+            return self.lastName;
+        } else {
+            return [NSString stringWithFormat:@"%@ %@", self.firstName, self.lastName];
+        }
+    }
 }
 
 @end

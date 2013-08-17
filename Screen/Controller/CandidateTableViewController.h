@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "CandidateDetailViewController.h"
+
 @interface CandidateTableViewController : UITableViewController {
     NSMutableArray *candidatesArray;
     NSManagedObjectContext *managedObjectContext;
@@ -18,6 +20,7 @@
 @property (nonatomic, retain) NSMutableArray *candidatesArray;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 
+@property (nonatomic, retain) CandidateDetailViewController *detailViewController;
 @property (nonatomic, retain) UIBarButtonItem *addButton;
 
 @end
