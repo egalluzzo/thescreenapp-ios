@@ -54,7 +54,7 @@
         self.ratingField.rating = 0;
     } else {
         self.nameField.text = self.candidate.fullName;
-        //    self.phoneField.text = self.candidate.phone;
+        self.phoneField.text = self.candidate.phone;
         self.ratingField.rating = self.candidate.rating.intValue;
     }
     self.ratingField.userRating = 0;
@@ -71,6 +71,7 @@
     if (self.candidate != nil) {
         // FIXME: Split the first and last name
         self.candidate.firstName = self.nameField.text;
+        self.candidate.phone = self.phoneField.text;
         self.candidate.rating = [NSNumber numberWithInt:self.ratingField.rating];
         
         NSError *error;

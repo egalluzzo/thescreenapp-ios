@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class Interview;
 
 @interface Candidate : NSManagedObject
 
@@ -16,9 +17,19 @@
 @property (nonatomic, retain) NSDate *creationDate;
 @property (nonatomic, retain) NSString *firstName;
 @property (nonatomic, retain) NSString *lastName;
+@property (nonatomic, retain) NSString *phone;
 @property (nonatomic, retain) NSNumber *rating;
+@property (nonatomic, retain) NSSet *interviews;
 
 //@property (readonly, nonatomic) NSString *fullName;
 - (NSString *)fullName;
+@end
+
+@interface Candidate (CoreDataGeneratedAccessors)
+
+- (void)addInterviewsObject:(Interview *)value;
+- (void)removeInterviewsObject:(Interview *)value;
+- (void)addInterviews:(NSSet *)values;
+- (void)removeInterviews:(NSSet *)values;
 
 @end

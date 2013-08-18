@@ -14,8 +14,10 @@
 @dynamic creationDate;
 @dynamic firstName;
 @dynamic lastName;
+@dynamic phone;
 @dynamic rating;
 @dynamic uuid;
+@dynamic interviews;
 
 - (void)awakeFromInsert
 {

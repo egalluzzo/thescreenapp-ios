@@ -8,6 +8,6 @@
         <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Candidate" positionX="160" positionY="192" width="128" height="118"/>
+        <element name="Candidate" positionX="-56" positionY="108" width="128" height="118"/>
     </elements>
 </model>
