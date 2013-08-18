@@ -7,7 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "InterviewDetailViewController.h"
 
-@interface InterviewTableViewController : UITableViewController
+@interface InterviewTableViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
+    NSMutableArray *interviewsArray;
+    NSManagedObjectContext *managedObjectContext;
+    UIBarButtonItem *addButton;
+}
+
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+
+@property (nonatomic, retain) InterviewDetailViewController *detailViewController;
+@property (nonatomic, retain) UIBarButtonItem *addButton;
+
 
 @end

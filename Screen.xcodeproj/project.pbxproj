@@ -37,6 +37,8 @@
 		07E0E6D9179AEA5800BB29C3 /* Screen.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 07E0E6D7179AEA5800BB29C3 /* Screen.xcdatamodeld */; };
 		07E0E6DC179AEDCC00BB29C3 /* Candidate.m in Sources */ = {isa = PBXBuildFile; fileRef = 07E0E6DB179AEDCC00BB29C3 /* Candidate.m */; };
 		07E0E6E1179B293500BB29C3 /* CandidateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07E0E6E0179B293500BB29C3 /* CandidateTableViewController.m */; };
+		9FA4E0DF17C09BDD005F0035 /* InterviewTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA4E0DE17C09BDD005F0035 /* InterviewTableViewController.m */; };
+		9FA4E0E217C09C4B005F0035 /* InterviewDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA4E0E117C09C4B005F0035 /* InterviewDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,13 +87,17 @@
 		070455BA17C041D800C42D19 /* Question.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Question.m; path = Model/Question.m; sourceTree = "<group>"; };
 		070455BC17C041D800C42D19 /* Interview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Interview.h; path = Model/Interview.h; sourceTree = "<group>"; };
 		070455BD17C041D800C42D19 /* Interview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Interview.m; path = Model/Interview.m; sourceTree = "<group>"; };
-		070455BF17C0637100C42D19 /* Screen 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Screen 2.xcdatamodel"; sourceTree = "<group>"; };
+		070455BF17C0637100C42D19 /* Screen 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Screen 2.xcdatamodel"; sourceTree = "<group>"; };
 		07E0E6D4179AE9B000BB29C3 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		07E0E6D8179AEA5800BB29C3 /* Screen.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Screen.xcdatamodel; sourceTree = "<group>"; };
 		07E0E6DA179AEDCC00BB29C3 /* Candidate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Candidate.h; path = Model/Candidate.h; sourceTree = "<group>"; };
 		07E0E6DB179AEDCC00BB29C3 /* Candidate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Candidate.m; path = Model/Candidate.m; sourceTree = "<group>"; };
 		07E0E6DD179B140300BB29C3 /* CandidateTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CandidateTableViewController.h; path = Controller/CandidateTableViewController.h; sourceTree = "<group>"; };
 		07E0E6E0179B293500BB29C3 /* CandidateTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CandidateTableViewController.m; path = Controller/CandidateTableViewController.m; sourceTree = "<group>"; };
+		9FA4E0DD17C09BDD005F0035 /* InterviewTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InterviewTableViewController.h; path = Controller/InterviewTableViewController.h; sourceTree = "<group>"; };
+		9FA4E0DE17C09BDD005F0035 /* InterviewTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InterviewTableViewController.m; path = Controller/InterviewTableViewController.m; sourceTree = "<group>"; };
+		9FA4E0E017C09C4B005F0035 /* InterviewDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InterviewDetailViewController.h; path = Controller/InterviewDetailViewController.h; sourceTree = "<group>"; };
+		9FA4E0E117C09C4B005F0035 /* InterviewDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InterviewDetailViewController.m; path = Controller/InterviewDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,9 +245,13 @@
 			isa = PBXGroup;
 			children = (
 				07E0E6DD179B140300BB29C3 /* CandidateTableViewController.h */,
+				9FA4E0E017C09C4B005F0035 /* InterviewDetailViewController.h */,
+				9FA4E0E117C09C4B005F0035 /* InterviewDetailViewController.m */,
 				07E0E6E0179B293500BB29C3 /* CandidateTableViewController.m */,
 				0704557617BC69B500C42D19 /* CandidateDetailViewController.h */,
 				0704557717BC69B500C42D19 /* CandidateDetailViewController.m */,
+				9FA4E0DD17C09BDD005F0035 /* InterviewTableViewController.h */,
+				9FA4E0DE17C09BDD005F0035 /* InterviewTableViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -373,6 +383,8 @@
 				0704557817BC69B500C42D19 /* CandidateDetailViewController.m in Sources */,
 				070455BB17C041D800C42D19 /* Question.m in Sources */,
 				070455BE17C041D800C42D19 /* Interview.m in Sources */,
+				9FA4E0DF17C09BDD005F0035 /* InterviewTableViewController.m in Sources */,
+				9FA4E0E217C09C4B005F0035 /* InterviewDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -25,7 +25,10 @@
     [super awakeFromInsert];
     
     self.creationDate = [NSDate date];
-    
+    self.location = @"glendale";
+    self.interviewDate = self.creationDate;
+    self.candidate = @"hitanshu";
+    self.questions = @"1.test?";
     // Create a new UUID.
     CFUUIDRef uuidObj = CFUUIDCreate(nil);
     // Convert to a CFStringRef, then an NSString *.
