@@ -12,8 +12,8 @@
 #define INTERVIEW_SECTION 1
 
 @interface CandidateDetailViewController ()
-@property (strong, nonatomic) UIPopoverController *masterPopoverController;
-@property (nonatomic, weak) NSArray *sortedInterviews;
+@property (nonatomic, strong) UIPopoverController *masterPopoverController;
+@property (nonatomic, strong) NSArray *sortedInterviews;
 - (void)configureView;
 - (void)configureInterviewCell:(UITableViewCell *)cell cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (void)addInterview;
