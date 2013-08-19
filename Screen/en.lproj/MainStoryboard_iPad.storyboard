@@ -232,7 +232,7 @@
                                                         <constraint firstAttribute="height" constant="30" id="cWi-WH-3QV"/>
                                                         <constraint firstAttribute="width" constant="573" id="sOg-OH-YEA"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="2R1-Cc-wDy" id="UD6-eY-ELZ"/>
@@ -414,10 +414,10 @@
             </objects>
             <point key="canvasLocation" x="2023" y="718"/>
         </scene>
-        <!--Table View Controller - Interview-->
+        <!--Interview Detail View Controller - Interview-->
         <scene sceneID="36S-bc-DHq">
             <objects>
-                <tableViewController id="jVQ-jU-yFE" sceneMemberID="viewController">
+                <tableViewController id="jVQ-jU-yFE" customClass="InterviewDetailViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="GHk-GT-gEB">
                         <rect key="frame" x="0.0" y="64" width="768" height="911"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -440,7 +440,7 @@
                                                     <color key="textColor" red="0.32156862749999998" green="0.40000000000000002" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nP3-1Y-ma7">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nP3-1Y-ma7">
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="573" id="gXZ-tr-SuT"/>
                                                     </constraints>
@@ -473,11 +473,21 @@
                                                     <color key="textColor" red="0.32156862749999998" green="0.40000000000000002" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Interview Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WzL-AY-Ptk">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="272" id="DUM-ab-Spj"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
                                             <constraint firstItem="XhV-jP-XHV" firstAttribute="leading" secondItem="T5u-e9-39Y" secondAttribute="leading" constant="55" id="Z4q-6A-OQD"/>
+                                            <constraint firstItem="WzL-AY-Ptk" firstAttribute="baseline" secondItem="XhV-jP-XHV" secondAttribute="baseline" type="default" id="j8a-cA-FAN"/>
+                                            <constraint firstItem="WzL-AY-Ptk" firstAttribute="leading" secondItem="XhV-jP-XHV" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="jtV-sO-5Iv"/>
                                             <constraint firstItem="XhV-jP-XHV" firstAttribute="centerY" secondItem="T5u-e9-39Y" secondAttribute="centerY" type="default" id="oth-Ti-Fp4"/>
                                         </constraints>
                                     </tableViewCell>
@@ -578,9 +588,9 @@
                                         </view>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="1lh-mp-h8w" secondAttribute="trailing" constant="45" id="1FK-Fo-Vra"/>
-                                            <constraint firstItem="1lh-mp-h8w" firstAttribute="baseline" secondItem="1bv-DP-1dT" secondAttribute="baseline" type="default" id="4jI-cQ-UxW"/>
                                             <constraint firstItem="1bv-DP-1dT" firstAttribute="leading" secondItem="lkx-sk-d83" secondAttribute="leading" constant="45" id="bsG-Yr-eyJ"/>
-                                            <constraint firstItem="1bv-DP-1dT" firstAttribute="top" secondItem="lkx-sk-d83" secondAttribute="top" constant="1" id="hAM-iN-oog"/>
+                                            <constraint firstItem="1bv-DP-1dT" firstAttribute="top" secondItem="lkx-sk-d83" secondAttribute="top" type="default" id="btz-fR-yBs"/>
+                                            <constraint firstItem="1lh-mp-h8w" firstAttribute="top" secondItem="lkx-sk-d83" secondAttribute="top" type="default" id="nbs-My-8ZX"/>
                                         </constraints>
                                     </tableViewCell>
                                 </cells>
@@ -588,6 +598,13 @@
                         </sections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Interview" id="jbn-AU-xHR"/>
+                    <connections>
+                        <outlet property="addInterviewButton" destination="1bv-DP-1dT" id="tgV-6K-S9M"/>
+                        <outlet property="candidateNameLabel" destination="nP3-1Y-ma7" id="eFP-dP-U4p"/>
+                        <outlet property="conductInterviewButton" destination="1lh-mp-h8w" id="4lq-cb-qwK"/>
+                        <outlet property="dateLabel" destination="WzL-AY-Ptk" id="7cz-dO-aoO"/>
+                        <outlet property="locationField" destination="Fgu-il-Z3b" id="IQU-l4-Bn6"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iem-VQ-gCA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -699,6 +716,16 @@
         </class>
         <class className="CandidateTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CandidateTableViewController.h"/>
+        </class>
+        <class className="InterviewDetailViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/InterviewDetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addInterviewButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="candidateNameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="conductInterviewButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="dateLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="locationField" candidateClass="UITextField"/>
+            </relationships>
         </class>
         <class className="InterviewTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/InterviewTableViewController.h"/>

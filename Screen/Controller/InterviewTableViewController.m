@@ -248,18 +248,18 @@
     static NSDateFormatter *dateFormatter = nil;
     if (dateFormatter == nil) {
         dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
+        [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
         [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     }
     
     Interview *interview = [self.fetchedResultsController objectAtIndexPath:indexPath];
-//    NSString *fullName = candidate.fullName;
-//    if ([fullName isEqualToString:@""]) {
-//        cell.textLabel.text = @"(no name)";
-//    } else {
-//        cell.textLabel.text = fullName;
-//    }
-    cell.detailTextLabel.text = [dateFormatter stringFromDate:[interview creationDate]];
+    NSString *fullName = interview.candidate.fullName;
+    if (fullName == nil || [fullName isEqualToString:@""]) {
+        cell.textLabel.text = @"(no name)";
+    } else {
+        cell.textLabel.text = fullName;
+    }
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"on %@", [dateFormatter stringFromDate:[interview interviewDate]]];
 }
 
 @end

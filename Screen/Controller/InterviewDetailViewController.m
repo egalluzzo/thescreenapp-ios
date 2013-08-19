@@ -9,10 +9,11 @@
 #import "InterviewDetailViewController.h"
 
 @interface InterviewDetailViewController ()
-
+- (void)configureView;
 @end
 
 @implementation InterviewDetailViewController
+@synthesize interview = _interview;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -21,6 +22,12 @@
         // Custom initialization
     }
     return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self configureView];
 }
 
 - (void)viewDidLoad
@@ -40,31 +47,64 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)setInterview:(Interview *)interview
+{
+    if (_interview != interview) {
+        _interview = interview;
+        [self configureView];
+        [[self tableView] reloadData];
+    }
+    
+//    if (self.masterPopoverController != nil) {
+//        [self.masterPopoverController dismissPopoverAnimated:YES];
+//    }
+}
+
+- (void)configureView
+{
+    // A date formatter for the time stamp.
+    static NSDateFormatter *dateFormatter = nil;
+    if (dateFormatter == nil) {
+        dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    }
+    
+    if (self.interview != nil) {
+        self.candidateNameLabel.text = self.interview.candidate.fullName;
+        self.dateLabel.text = [dateFormatter stringFromDate:self.interview.interviewDate];
+        self.locationField.text = self.interview.location;
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    
     // Return the number of sections.
-    return 0;
+    if (self.interview == nil) {
+        return 0;
+    } else {
+        return [super numberOfSectionsInTableView:tableView];
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return [super tableView:tableView numberOfRowsInSection:section];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    return [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    /*
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
     
     return cell;
+     */
 }
 
 /*
