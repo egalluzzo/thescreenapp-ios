@@ -23,7 +23,6 @@
 @property(nonatomic, weak) IBOutlet UIButton *addInterviewButton;
 @property(nonatomic, weak) IBOutlet UIButton *conductInterviewButton;
 
--(void)saveCandidate;
 -(void)saveInterview;
 
 @end

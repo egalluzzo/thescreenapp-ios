@@ -28,8 +28,15 @@
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+        
+        // Candidates tab
         UISplitViewController *splitViewController = tabBarController.viewControllers[0];
         UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
+        splitViewController.delegate = (id)navigationController.topViewController;
+        
+        // Interviews tab
+        splitViewController = tabBarController.viewControllers[1];
+        navigationController = [splitViewController.viewControllers lastObject];
         splitViewController.delegate = (id)navigationController.topViewController;
     }
 

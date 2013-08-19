@@ -14,6 +14,7 @@
 @interface CandidateDetailViewController : UITableViewController <UITextFieldDelegate, StarRatingViewDelegate>
 
 @property(nonatomic, strong) Candidate *candidate;
+
 @property(nonatomic, weak) IBOutlet UITextField *nameField;
 @property(nonatomic, weak) IBOutlet UITextField *phoneField;
 @property(nonatomic, weak) IBOutlet StarRatingView *ratingField;

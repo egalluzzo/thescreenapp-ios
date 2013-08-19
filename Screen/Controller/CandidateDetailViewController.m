@@ -7,16 +7,24 @@
 //
 
 #import "CandidateDetailViewController.h"
+#import "Interview.h"
+
+#define INTERVIEW_SECTION 1
 
 @interface CandidateDetailViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
+@property (nonatomic, weak) NSArray *sortedInterviews;
 - (void)configureView;
+- (void)configureInterviewCell:(UITableViewCell *)cell cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (void)addInterview;
 @end
 
 
 @implementation CandidateDetailViewController
 
 @synthesize candidate = _candidate;
+@synthesize sortedInterviews = _sortedInterviews;
+
 @synthesize nameField;
 @synthesize phoneField;
 @synthesize ratingField;
@@ -37,6 +45,9 @@
 {
     if (_candidate != candidate) {
         _candidate = candidate;
+        _sortedInterviews = [candidate.interviews sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"interviewDate" ascending:NO]]];
+        NSLog(@"Candidate interviews: %@", self.candidate.interviews);
+        NSLog(@"Sorted interviews: %@", _sortedInterviews);
         [self configureView];
         [[self tableView] reloadData];
     }
@@ -58,6 +69,25 @@
         self.ratingField.rating = self.candidate.rating.intValue;
     }
     self.ratingField.userRating = 0;
+}
+
+- (void)addInterview
+{
+    Interview *interview = [NSEntityDescription insertNewObjectForEntityForName:@"Interview"
+                                                         inManagedObjectContext:self.candidate.managedObjectContext];
+    interview.candidate = self.candidate;
+    [self.candidate addInterviewsObject:interview];
+    [self saveCandidate];
+    
+    _sortedInterviews = [self.candidate.interviews sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"interviewDate" ascending:NO]]];
+    NSLog(@"Candidate interviews: %@", self.candidate.interviews);
+    NSLog(@"Sorted interviews: %@", _sortedInterviews);
+    
+    NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:[self.sortedInterviews indexOfObject:interview]
+                                                   inSection:INTERVIEW_SECTION];
+    NSLog(@"New index path: %@", newIndexPath);
+    [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
+                          withRowAnimation:UITableViewRowAnimationMiddle];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -86,7 +116,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
+    [self.addInterviewButton addTarget:self
+                                action:@selector(addInterview)
+                      forControlEvents:UIControlEventTouchUpInside];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -115,52 +149,92 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [super tableView:tableView numberOfRowsInSection:section];
+    if (section == INTERVIEW_SECTION) {
+        if (self.candidate) {
+            return self.sortedInterviews.count;
+        } else {
+            return 0;
+        }
+    } else {
+        return [super tableView:tableView numberOfRowsInSection:section];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    if (indexPath.section == INTERVIEW_SECTION) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"InterviewCell"];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"InterviewCell"];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
+        [self configureInterviewCell:cell cellForRowAtIndexPath:indexPath];
+        return cell;
+    } else {
+        return [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    }
 }
 
-/*
-// Override to support conditional editing of the table view.
+- (void)configureInterviewCell:(UITableViewCell *)cell cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSDateFormatter *dateFormatter = nil;
+    if (dateFormatter == nil) {
+        dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
+        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    }
+    
+    Interview *interview = [self.sortedInterviews objectAtIndex:indexPath.row];
+    cell.textLabel.text = [dateFormatter stringFromDate:interview.interviewDate];
+    cell.detailTextLabel.text = interview.location;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    int section = indexPath.section;
+    
+    // if dynamic section make all rows the same height as row 0
+    if (section == INTERVIEW_SECTION) {
+        return [super tableView:tableView heightForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
+    } else {
+        return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+    }
+}
+
+- (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    int section = indexPath.section;
+    
+    // if dynamic section make all rows the same indentation level as row 0
+    if (section == INTERVIEW_SECTION) {
+        return [super tableView:tableView indentationLevelForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
+    } else {
+        return [super tableView:tableView indentationLevelForRowAtIndexPath:indexPath];
+    }
+}
+
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleNone;
+}
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+    return NO;
 }
-*/
 
-/*
-// Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
 }
-*/
 
-/*
-// Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+    return NO;
 }
-*/
 
 #pragma mark - Split view
 

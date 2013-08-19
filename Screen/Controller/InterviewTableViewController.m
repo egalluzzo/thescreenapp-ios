@@ -18,7 +18,6 @@
 @implementation InterviewTableViewController
 
 @synthesize managedObjectContext;
-@synthesize addButton;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -47,11 +46,6 @@
     
     // Set up the buttons.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
-    
-    addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                              target:self
-                                                              action:@selector(addInterview)];
-    self.navigationItem.rightBarButtonItem = addButton;
     
     self.detailViewController = (InterviewDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
     

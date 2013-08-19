@@ -10,15 +10,10 @@
 
 #import "CandidateDetailViewController.h"
 
-@interface CandidateTableViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
-    NSMutableArray *candidatesArray;
-    NSManagedObjectContext *managedObjectContext;
-
-    UIBarButtonItem *addButton;
-}
+@interface CandidateTableViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
 @property (nonatomic, retain) CandidateDetailViewController *detailViewController;
 @property (nonatomic, retain) UIBarButtonItem *addButton;

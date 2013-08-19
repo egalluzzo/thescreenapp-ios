@@ -244,12 +244,12 @@
 		0700537D17860A21005D947E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				07E0E6DD179B140300BB29C3 /* CandidateTableViewController.h */,
-				9FA4E0E017C09C4B005F0035 /* InterviewDetailViewController.h */,
-				9FA4E0E117C09C4B005F0035 /* InterviewDetailViewController.m */,
-				07E0E6E0179B293500BB29C3 /* CandidateTableViewController.m */,
 				0704557617BC69B500C42D19 /* CandidateDetailViewController.h */,
 				0704557717BC69B500C42D19 /* CandidateDetailViewController.m */,
+				07E0E6DD179B140300BB29C3 /* CandidateTableViewController.h */,
+				07E0E6E0179B293500BB29C3 /* CandidateTableViewController.m */,
+				9FA4E0E017C09C4B005F0035 /* InterviewDetailViewController.h */,
+				9FA4E0E117C09C4B005F0035 /* InterviewDetailViewController.m */,
 				9FA4E0DD17C09BDD005F0035 /* InterviewTableViewController.h */,
 				9FA4E0DE17C09BDD005F0035 /* InterviewTableViewController.m */,
 			);
