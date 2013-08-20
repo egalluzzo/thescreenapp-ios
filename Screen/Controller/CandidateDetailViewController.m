@@ -7,6 +7,7 @@
 //
 
 #import "CandidateDetailViewController.h"
+#import "InterviewDetailViewController.h"
 #import "Interview.h"
 
 #define INTERVIEW_SECTION 1
@@ -252,13 +253,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    if (indexPath.section == INTERVIEW_SECTION) {
+        Interview *interview = [self.sortedInterviews objectAtIndex:indexPath.row];
+        [self.interviewDetailViewController setInterview:interview];
+        [self.navigationController pushViewController:self.interviewDetailViewController animated:YES];
+    }
 }
 
 #pragma mark - Star rating view delegate

@@ -232,7 +232,7 @@
                                                         <constraint firstAttribute="height" constant="30" id="cWi-WH-3QV"/>
                                                         <constraint firstAttribute="width" constant="573" id="sOg-OH-YEA"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="2R1-Cc-wDy" id="UD6-eY-ELZ"/>
@@ -242,7 +242,8 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="klh-3C-aJU" firstAttribute="centerY" secondItem="oPs-y8-Mcc" secondAttribute="centerY" type="default" id="IZs-oA-sid"/>
+                                            <constraint firstItem="klh-3C-aJU" firstAttribute="top" secondItem="oPs-y8-Mcc" secondAttribute="top" constant="6" id="5iD-E4-pZx"/>
+                                            <constraint firstItem="m2J-rg-3Wi" firstAttribute="top" secondItem="oPs-y8-Mcc" secondAttribute="top" constant="16" id="Bdc-Ku-H7D"/>
                                             <constraint firstItem="klh-3C-aJU" firstAttribute="leading" secondItem="m2J-rg-3Wi" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="hrh-nw-4B5"/>
                                             <constraint firstItem="m2J-rg-3Wi" firstAttribute="leading" secondItem="oPs-y8-Mcc" secondAttribute="leading" constant="55" id="pXa-G1-UPc"/>
                                             <constraint firstItem="klh-3C-aJU" firstAttribute="baseline" secondItem="m2J-rg-3Wi" secondAttribute="baseline" type="default" id="s1n-7t-6jB"/>
@@ -268,7 +269,7 @@
                                                         <constraint firstAttribute="width" constant="573" id="SLb-xU-HUI"/>
                                                         <constraint firstAttribute="height" constant="30" id="kYq-k1-mT5"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="2R1-Cc-wDy" id="tYV-ku-uBC"/>
@@ -279,9 +280,10 @@
                                         </view>
                                         <constraints>
                                             <constraint firstItem="RuC-Ea-O26" firstAttribute="leading" secondItem="IZl-cz-Khz" secondAttribute="leading" constant="55" id="9SN-Zm-5nO"/>
+                                            <constraint firstItem="RuC-Ea-O26" firstAttribute="top" secondItem="IZl-cz-Khz" secondAttribute="top" constant="16" id="Fol-8M-f3e"/>
                                             <constraint firstItem="KN7-Lg-fSU" firstAttribute="leading" secondItem="RuC-Ea-O26" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="HPx-rm-Ii8"/>
                                             <constraint firstItem="KN7-Lg-fSU" firstAttribute="baseline" secondItem="RuC-Ea-O26" secondAttribute="baseline" type="default" id="Ny1-kY-NRG"/>
-                                            <constraint firstItem="KN7-Lg-fSU" firstAttribute="top" secondItem="IZl-cz-Khz" secondAttribute="top" constant="8" id="hjN-vm-5ku"/>
+                                            <constraint firstItem="KN7-Lg-fSU" firstAttribute="top" secondItem="IZl-cz-Khz" secondAttribute="top" constant="6" id="VKA-63-wSL"/>
                                         </constraints>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="DdN-3D-yxE">
@@ -511,15 +513,16 @@
                                                         <constraint firstAttribute="height" constant="30" id="YDY-xB-g5e"/>
                                                         <constraint firstAttribute="width" constant="573" id="dIq-0L-2yP"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
+                                            <constraint firstItem="JjR-9m-RGx" firstAttribute="top" secondItem="lzx-HQ-bUK" secondAttribute="top" constant="14" id="D7j-AA-wB0"/>
                                             <constraint firstItem="Fgu-il-Z3b" firstAttribute="leading" secondItem="JjR-9m-RGx" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="Q1e-pc-Xc8"/>
-                                            <constraint firstItem="Fgu-il-Z3b" firstAttribute="top" secondItem="lzx-HQ-bUK" secondAttribute="top" constant="6" id="gTl-Fd-9rg"/>
+                                            <constraint firstItem="Fgu-il-Z3b" firstAttribute="top" secondItem="lzx-HQ-bUK" secondAttribute="top" constant="4" id="XRR-ay-vw6"/>
                                             <constraint firstItem="Fgu-il-Z3b" firstAttribute="baseline" secondItem="JjR-9m-RGx" secondAttribute="baseline" type="default" id="lDE-cd-3B5"/>
                                             <constraint firstItem="JjR-9m-RGx" firstAttribute="leading" secondItem="lzx-HQ-bUK" secondAttribute="leading" constant="55" id="pvg-Zd-vIO"/>
                                         </constraints>
@@ -599,7 +602,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Interview" id="jbn-AU-xHR"/>
                     <connections>
-                        <outlet property="addInterviewButton" destination="1bv-DP-1dT" id="tgV-6K-S9M"/>
+                        <outlet property="addQuestionButton" destination="1bv-DP-1dT" id="qh0-lg-Ehz"/>
                         <outlet property="candidateNameLabel" destination="nP3-1Y-ma7" id="eFP-dP-U4p"/>
                         <outlet property="conductInterviewButton" destination="1lh-mp-h8w" id="4lq-cb-qwK"/>
                         <outlet property="dateLabel" destination="WzL-AY-Ptk" id="7cz-dO-aoO"/>
@@ -720,7 +723,7 @@
         <class className="InterviewDetailViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/InterviewDetailViewController.h"/>
             <relationships>
-                <relationship kind="outlet" name="addInterviewButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="addQuestionButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="candidateNameLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="conductInterviewButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="dateLabel" candidateClass="UILabel"/>

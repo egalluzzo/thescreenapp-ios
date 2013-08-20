@@ -9,11 +9,14 @@
 #import <UIKit/UIKit.h>
 
 #import "Candidate.h"
+#import "InterviewDetailViewController.h"
 #import "StarRatingView.h"
 
 @interface CandidateDetailViewController : UITableViewController <UISplitViewControllerDelegate, StarRatingViewDelegate>
 
 @property(nonatomic, strong) Candidate *candidate;
+
+@property(nonatomic, strong) InterviewDetailViewController *interviewDetailViewController;
 
 @property(nonatomic, weak) IBOutlet UITextField *nameField;
 @property(nonatomic, weak) IBOutlet UITextField *phoneField;

@@ -19,7 +19,7 @@
 @property(nonatomic, weak) IBOutlet UILabel *candidateNameLabel;
 @property(nonatomic, weak) IBOutlet UILabel *dateLabel;
 @property(nonatomic, weak) IBOutlet UITextField *locationField;
-@property(nonatomic, weak) IBOutlet UIButton *addInterviewButton;
+@property(nonatomic, weak) IBOutlet UIButton *addQuestionButton;
 @property(nonatomic, weak) IBOutlet UIButton *conductInterviewButton;
 
 -(void)saveInterview;

@@ -9,6 +9,7 @@
 #import "ScreenAppDelegate.h"
 
 #import "CandidateDetailViewController.h"
+#import "InterviewDetailViewController.h"
 
 @implementation ScreenAppDelegate
 
@@ -32,12 +33,18 @@
         // Candidates tab
         UISplitViewController *splitViewController = tabBarController.viewControllers[0];
         UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
-        splitViewController.delegate = (id)navigationController.topViewController;
+        CandidateDetailViewController *candidateDetailViewController =
+            (CandidateDetailViewController *) navigationController.topViewController;
+        splitViewController.delegate = candidateDetailViewController;
         
         // Interviews tab
         splitViewController = tabBarController.viewControllers[1];
         navigationController = [splitViewController.viewControllers lastObject];
-        splitViewController.delegate = (id)navigationController.topViewController;
+        InterviewDetailViewController *interviewDetailViewController =
+            (InterviewDetailViewController *) navigationController.topViewController;
+        splitViewController.delegate = interviewDetailViewController;
+        
+        candidateDetailViewController.interviewDetailViewController = interviewDetailViewController;
     }
 
     return YES;
