@@ -30,26 +30,11 @@
 @synthesize ratingField;
 @synthesize addInterviewButton;
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        self.nameField.delegate = self;
-        self.phoneField.delegate = self;
-        self.ratingField.delegate = self;
-    }
-    return self;
-}
-
 - (void)setCandidate:(Candidate *)candidate
 {
     if (_candidate != candidate) {
         _candidate = candidate;
-        _sortedInterviews = [candidate.interviews sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"interviewDate" ascending:NO]]];
-        NSLog(@"Candidate interviews: %@", self.candidate.interviews);
-        NSLog(@"Sorted interviews: %@", _sortedInterviews);
         [self configureView];
-        [[self tableView] reloadData];
     }
     
     if (self.masterPopoverController != nil) {
@@ -69,6 +54,10 @@
         self.ratingField.rating = self.candidate.rating.intValue;
     }
     self.ratingField.userRating = 0;
+    
+    // Reload the interviews in case they have changed.
+    _sortedInterviews = [self.candidate.interviews sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"interviewDate" ascending:NO]]];
+    [[self tableView] reloadData];
 }
 
 - (void)addInterview
@@ -80,14 +69,13 @@
     [self saveCandidate];
     
     _sortedInterviews = [self.candidate.interviews sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"interviewDate" ascending:NO]]];
-    NSLog(@"Candidate interviews: %@", self.candidate.interviews);
-    NSLog(@"Sorted interviews: %@", _sortedInterviews);
     
-    NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:[self.sortedInterviews indexOfObject:interview]
-                                                   inSection:INTERVIEW_SECTION];
-    NSLog(@"New index path: %@", newIndexPath);
-    [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
-                          withRowAnimation:UITableViewRowAnimationMiddle];
+    // Note: I tried just inserting a single index path here but it
+    // sometimes got confused and drew cells in different sections
+    // over top of each other, probably due to the static/dynamic
+    // nature of the table.
+    [[self tableView] reloadSections:[NSIndexSet indexSetWithIndex:INTERVIEW_SECTION]
+                    withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -120,6 +108,14 @@
     [self.addInterviewButton addTarget:self
                                 action:@selector(addInterview)
                       forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.nameField addTarget:self
+                       action:@selector(saveCandidate)
+             forControlEvents:UIControlEventEditingChanged];
+    
+    [self.phoneField addTarget:self
+                        action:@selector(saveCandidate)
+              forControlEvents:UIControlEventEditingChanged];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -263,13 +259,6 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
-}
-
-#pragma mark - Text view delegate
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-    [self saveCandidate];
 }
 
 #pragma mark - Star rating view delegate

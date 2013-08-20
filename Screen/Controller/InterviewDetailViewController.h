@@ -12,7 +12,7 @@
 #import "Question.h"
 
 
-@interface InterviewDetailViewController : UITableViewController<UITextFieldDelegate>
+@interface InterviewDetailViewController : UITableViewController<UISplitViewControllerDelegate, UITextFieldDelegate>
 
 @property(nonatomic, strong) Interview *interview;
 
