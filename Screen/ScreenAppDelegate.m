@@ -43,8 +43,6 @@
         InterviewDetailViewController *interviewDetailViewController =
             (InterviewDetailViewController *) navigationController.topViewController;
         splitViewController.delegate = interviewDetailViewController;
-        
-        candidateDetailViewController.interviewDetailViewController = interviewDetailViewController;
     }
 
     return YES;

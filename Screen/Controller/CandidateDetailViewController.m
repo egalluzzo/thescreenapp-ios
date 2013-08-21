@@ -106,6 +106,9 @@
 {
     [super viewDidLoad];
     
+    self.interviewDetailViewController =
+        [self.storyboard instantiateViewControllerWithIdentifier:@"InterviewDetailViewController"];
+    
     [self.addInterviewButton addTarget:self
                                 action:@selector(addInterview)
                       forControlEvents:UIControlEventTouchUpInside];
