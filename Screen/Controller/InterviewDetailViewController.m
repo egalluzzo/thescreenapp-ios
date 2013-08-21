@@ -8,14 +8,21 @@
 
 #import "InterviewDetailViewController.h"
 
+#define QUESTIONS_SECTION 1
+
 @interface InterviewDetailViewController ()
 @property (nonatomic, strong) UIPopoverController *masterPopoverController;
 @property (nonatomic, strong) UIPopoverController *datePopoverController;
+@property (nonatomic, strong) NSArray *sortedQuestions;
 - (void)configureView;
+- (void)configureQuestionCell:(UITableViewCell *)cell cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (void)addQuestion;
 @end
 
 @implementation InterviewDetailViewController
+
 @synthesize interview = _interview;
+@synthesize sortedQuestions = _sortedQuestions;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -35,6 +42,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.addQuestionButton addTarget:self
+                               action:@selector(addQuestion)
+                     forControlEvents:UIControlEventTouchUpInside];
     
     [self.locationField addTarget:self
                            action:@selector(saveInterview)
@@ -91,7 +102,29 @@
         self.candidateNameLabel.text = self.interview.candidate.fullName;
         self.locationField.text = self.interview.location;
         [self reloadDateLabel];
+        
+        // Reload the interviews in case they have changed.
+        _sortedQuestions = [self.interview.questions sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"question" ascending:NO]]];
+        [[self tableView] reloadData];
     }
+}
+
+- (void)addQuestion
+{
+    Question *question = [NSEntityDescription insertNewObjectForEntityForName:@"Question"
+                                                       inManagedObjectContext:self.interview.managedObjectContext];
+    question.interview = self.interview;
+    [self.interview addQuestionsObject:question];
+    [self saveInterview];
+    
+    _sortedQuestions = [self.interview.questions sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"question" ascending:NO]]];
+    
+    // Note: I tried just inserting a single index path here but it
+    // sometimes got confused and drew cells in different sections
+    // over top of each other, probably due to the static/dynamic
+    // nature of the table.
+    [[self tableView] reloadSections:[NSIndexSet indexSetWithIndex:QUESTIONS_SECTION]
+                    withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (void)reloadDateLabel
@@ -143,7 +176,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
+    // If we have no candidate, there are no sections.
     if (self.interview == nil) {
         return 0;
     } else {
@@ -153,60 +186,84 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [super tableView:tableView numberOfRowsInSection:section];
+    // Return the number of rows in the section.
+    if (section == QUESTIONS_SECTION) {
+        if (self.interview) {
+            return self.sortedQuestions.count;
+        } else {
+            return 0;
+        }
+    } else {
+        return [super tableView:tableView numberOfRowsInSection:section];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [super tableView:tableView cellForRowAtIndexPath:indexPath];
-    /*
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-     */
+    if (indexPath.section == QUESTIONS_SECTION) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QuestionCell"];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"QuestionCell"];
+        }
+        [self configureQuestionCell:cell cellForRowAtIndexPath:indexPath];
+        return cell;
+    } else {
+        return [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    }
 }
 
-/*
-// Override to support conditional editing of the table view.
+- (void)configureQuestionCell:(UITableViewCell *)cell cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Question *question = [self.sortedQuestions objectAtIndex:indexPath.row];
+    cell.textLabel.text = question.question;
+    cell.detailTextLabel.text = @""; // Not sure what we should put here...
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    int section = indexPath.section;
+    
+    // if dynamic section make all rows the same height as row 0
+    if (section == QUESTIONS_SECTION) {
+        return [super tableView:tableView heightForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
+    } else {
+        return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+    }
+}
+
+- (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    int section = indexPath.section;
+    
+    // if dynamic section make all rows the same indentation level as row 0
+    if (section == QUESTIONS_SECTION) {
+        return [super tableView:tableView indentationLevelForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
+    } else {
+        return [super tableView:tableView indentationLevelForRowAtIndexPath:indexPath];
+    }
+}
+
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleNone;
+}
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
 }
-*/
 
-/*
-// Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
 }
-*/
 
-/*
-// Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+    return NO;
 }
-*/
 
 #pragma mark - Split view
 
