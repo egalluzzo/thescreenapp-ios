@@ -35,6 +35,7 @@
 		070455BE17C041D800C42D19 /* Interview.m in Sources */ = {isa = PBXBuildFile; fileRef = 070455BD17C041D800C42D19 /* Interview.m */; };
 		070455C517C5823200C42D19 /* TextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 070455C417C5823200C42D19 /* TextFieldTableViewCell.m */; };
 		070455C717C582B300C42D19 /* TextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 070455C617C582B300C42D19 /* TextFieldTableViewCell.xib */; };
+		070455C917C5A7F300C42D19 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 070455C817C5A7F300C42D19 /* EventKit.framework */; };
 		07E0E6D5179AE9B000BB29C3 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E0E6D4179AE9B000BB29C3 /* CoreData.framework */; };
 		07E0E6D9179AEA5800BB29C3 /* Screen.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 07E0E6D7179AEA5800BB29C3 /* Screen.xcdatamodeld */; };
 		07E0E6DC179AEDCC00BB29C3 /* Candidate.m in Sources */ = {isa = PBXBuildFile; fileRef = 07E0E6DB179AEDCC00BB29C3 /* Candidate.m */; };
@@ -93,6 +94,7 @@
 		070455C317C5823200C42D19 /* TextFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextFieldTableViewCell.h; path = View/TextFieldTableViewCell.h; sourceTree = "<group>"; };
 		070455C417C5823200C42D19 /* TextFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TextFieldTableViewCell.m; path = View/TextFieldTableViewCell.m; sourceTree = "<group>"; };
 		070455C617C582B300C42D19 /* TextFieldTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TextFieldTableViewCell.xib; path = View/TextFieldTableViewCell.xib; sourceTree = "<group>"; };
+		070455C817C5A7F300C42D19 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		07E0E6D4179AE9B000BB29C3 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		07E0E6D8179AEA5800BB29C3 /* Screen.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Screen.xcdatamodel; sourceTree = "<group>"; };
 		07E0E6DA179AEDCC00BB29C3 /* Candidate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Candidate.h; path = Model/Candidate.h; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				070455C917C5A7F300C42D19 /* EventKit.framework in Frameworks */,
 				07E0E6D5179AE9B000BB29C3 /* CoreData.framework in Frameworks */,
 				070053261779D8A3005D947E /* UIKit.framework in Frameworks */,
 				070053281779D8A3005D947E /* Foundation.framework in Frameworks */,
@@ -133,6 +136,7 @@
 		070053191779D8A3005D947E = {
 			isa = PBXGroup;
 			children = (
+				070455C817C5A7F300C42D19 /* EventKit.framework */,
 				0700532B1779D8A3005D947E /* Screen */,
 				0700535D1779D8A3005D947E /* ScreenTests */,
 				070053241779D8A3005D947E /* Frameworks */,

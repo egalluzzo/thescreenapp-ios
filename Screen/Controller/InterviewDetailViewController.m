@@ -6,19 +6,30 @@
 //  Copyright (c) 2013 Eric Galluzzo. All rights reserved.
 //
 
+#import <EventKit/EventKit.h>
+
 #import "InterviewDetailViewController.h"
 #import "TextFieldTableViewCell.h"
 
-#define QUESTIONS_SECTION 1
+#define QUESTIONS_SECTION 2
 
 @interface InterviewDetailViewController ()
+
 @property (nonatomic, strong) UIPopoverController *masterPopoverController;
 @property (nonatomic, strong) UIPopoverController *datePopoverController;
 @property (nonatomic, strong) NSArray *sortedQuestions;
+
 - (void)configureView;
 - (void)configureQuestionCell:(UITableViewCell *)cell cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+
+- (void)addToCalendar;
 - (void)addQuestion;
+- (void)editQuestions;
+
+- (void)showAlertWithTitle:title message:message;
+
 @end
+
 
 @implementation InterviewDetailViewController
 
@@ -44,9 +55,17 @@
 {
     [super viewDidLoad];
     
+    [self.addToCalendarButton addTarget:self
+                                 action:@selector(addToCalendar)
+                       forControlEvents:UIControlEventTouchUpInside];
+    
     [self.addQuestionButton addTarget:self
                                action:@selector(addQuestion)
                      forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.editQuestionsButton addTarget:self
+                                 action:@selector(editQuestions)
+                       forControlEvents:UIControlEventTouchUpInside];
     
     [self.locationField addTarget:self
                            action:@selector(saveInterview)
@@ -110,6 +129,71 @@
     }
 }
 
+- (void)addToCalendar
+{
+    // See http://stackoverflow.com/questions/13082678/add-event-to-calendar-in-xcode-ios
+    EKEventStore *eventStore = [[EKEventStore alloc] init];
+    if ([eventStore respondsToSelector:@selector(requestAccessToEntityType:completion:)])
+    {
+        // the selector is available, so we must be on iOS 6 or newer
+        [eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (error)
+                {
+                    [self showAlertWithTitle:@"Interview Not Added" message:@"Could not add the event to your calendar."];
+                }
+                else if (!granted)
+                {
+                    [self showAlertWithTitle:@"Interview Not Added" message:@"Access to your calendar was denied."];
+                }
+                else
+                {
+                    // access granted
+                    [self addEventToCalendarAfterAccessGranted];
+                }
+            });
+        }];
+    }
+    else
+    {
+        // This code runs in iOS 4 or iOS 5
+        [self addEventToCalendarAfterAccessGranted];
+    }
+}
+
+- (void)addEventToCalendarAfterAccessGranted
+{
+    EKEventStore *eventStore = [[EKEventStore alloc] init];
+    
+    EKEvent *event = [EKEvent eventWithEventStore:eventStore];
+    event.title = [NSString stringWithFormat:@"Interview for %@", self.interview.candidate.fullName];
+    
+    event.startDate = self.interview.interviewDate;
+    event.endDate = [self.interview.interviewDate dateByAddingTimeInterval:60*60];
+    event.location = self.interview.location;
+    
+    [event setCalendar:[eventStore defaultCalendarForNewEvents]];
+    NSError *error;
+    if (![eventStore saveEvent:event span:EKSpanThisEvent error:&error]) {
+        // FIXME: Need a better error handling mechanism...
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+    
+    [self showAlertWithTitle:@"Interview Added" message:@"The interview has been added to your calendar."];
+}
+
+- (void)showAlertWithTitle:title message:message
+{
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:title
+                          message:message
+                          delegate:nil
+                          cancelButtonTitle:@"Dismiss"
+                          otherButtonTitles:nil];
+    [alert show];
+}
+
 - (void)addQuestion
 {
     Question *question = [NSEntityDescription insertNewObjectForEntityForName:@"Question"
@@ -126,6 +210,14 @@
     // nature of the table.
     [[self tableView] reloadSections:[NSIndexSet indexSetWithIndex:QUESTIONS_SECTION]
                     withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+- (void)editQuestions
+{
+    // Doesn't work yet
+//    self.editing = !self.editing;
+//    [self.editQuestionsButton setTitle:(self.editing ? @"Done" : @"Edit")
+//                              forState:UIControlStateNormal | UIControlStateSelected | UIControlStateHighlighted | UIControlStateDisabled];
 }
 
 - (void)reloadDateLabel
@@ -253,15 +345,34 @@
 
 -(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return UITableViewCellEditingStyleNone;
+    if (indexPath.section == QUESTIONS_SECTION) {
+        return UITableViewCellEditingStyleDelete;
+    } else {
+        return UITableViewCellEditingStyleNone;
+    }
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    return (indexPath.section == QUESTIONS_SECTION);
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    Question *question = nil;
+    if (indexPath.section == QUESTIONS_SECTION) {
+        switch (editingStyle) {
+            case UITableViewCellEditingStyleDelete:
+                question = [self.sortedQuestions objectAtIndex:indexPath.row];
+                [self.interview removeQuestionsObject:question];
+                [self saveInterview];
+                [[self tableView] reloadSections:[NSIndexSet indexSetWithIndex:QUESTIONS_SECTION]
+                                withRowAnimation:UITableViewRowAnimationAutomatic];
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
