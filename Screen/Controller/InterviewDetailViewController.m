@@ -7,6 +7,7 @@
 //
 
 #import "InterviewDetailViewController.h"
+#import "TextFieldTableViewCell.h"
 
 #define QUESTIONS_SECTION 1
 
@@ -201,9 +202,17 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == QUESTIONS_SECTION) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QuestionCell"];
+        TextFieldTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TextFieldTableViewCell"];
         if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"QuestionCell"];
+            // Find the table cell out of the NIB.
+            NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"TextFieldTableViewCell" owner:nil options:nil];
+            for (UIView *view in views) {
+                if([view isKindOfClass:[UITableViewCell class]]) {
+                    cell = (TextFieldTableViewCell *)view;
+                }
+            }
+            cell.textField.delegate = self;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         [self configureQuestionCell:cell cellForRowAtIndexPath:indexPath];
         return cell;
@@ -212,11 +221,10 @@
     }
 }
 
-- (void)configureQuestionCell:(UITableViewCell *)cell cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)configureQuestionCell:(TextFieldTableViewCell *)cell cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Question *question = [self.sortedQuestions objectAtIndex:indexPath.row];
-    cell.textLabel.text = question.question;
-    cell.detailTextLabel.text = @""; // Not sure what we should put here...
+    cell.textField.text = question.question;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -292,6 +300,34 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+}
+
+#pragma mark - Text field delegate
+
+// See http://stackoverflow.com/questions/4375442/accessing-uitextfield-in-a-custom-uitableviewcell
+- (void) textFieldDidEndEditing:(UITextField *)textField
+{
+    // this should return you your current indexPath
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:(TextFieldTableViewCell*)[[textField superview] superview]];
+    if (indexPath.section == QUESTIONS_SECTION) {
+        Question *question = [self.sortedQuestions objectAtIndex:indexPath.row];
+        question.question = textField.text;
+        
+        NSError *error;
+        if ([question.managedObjectContext hasChanges] && ![question.managedObjectContext save:&error]) {
+            // FIXME: Need a better error handling mechanism...
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        }
+    }
+}
+
+- (void) textFieldDidBeginEditing:(UITextField *)textField
+{
+    TextFieldTableViewCell *cell = (TextFieldTableViewCell *) [[textField superview] superview];
+    [self.tableView scrollToRowAtIndexPath:[self.tableView indexPathForCell:cell]
+                          atScrollPosition:UITableViewScrollPositionMiddle
+                                  animated:YES];
 }
 
 @end
