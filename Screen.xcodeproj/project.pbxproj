@@ -36,6 +36,7 @@
 		070455C517C5823200C42D19 /* TextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 070455C417C5823200C42D19 /* TextFieldTableViewCell.m */; };
 		070455C717C582B300C42D19 /* TextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 070455C617C582B300C42D19 /* TextFieldTableViewCell.xib */; };
 		070455C917C5A7F300C42D19 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 070455C817C5A7F300C42D19 /* EventKit.framework */; };
+		07D6FF0B187B477500DEAF12 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07D6FF0A187B477500DEAF12 /* Images.xcassets */; };
 		07E0E6D5179AE9B000BB29C3 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E0E6D4179AE9B000BB29C3 /* CoreData.framework */; };
 		07E0E6D9179AEA5800BB29C3 /* Screen.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 07E0E6D7179AEA5800BB29C3 /* Screen.xcdatamodeld */; };
 		07E0E6DC179AEDCC00BB29C3 /* Candidate.m in Sources */ = {isa = PBXBuildFile; fileRef = 07E0E6DB179AEDCC00BB29C3 /* Candidate.m */; };
@@ -95,6 +96,7 @@
 		070455C417C5823200C42D19 /* TextFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TextFieldTableViewCell.m; path = View/TextFieldTableViewCell.m; sourceTree = "<group>"; };
 		070455C617C582B300C42D19 /* TextFieldTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TextFieldTableViewCell.xib; path = View/TextFieldTableViewCell.xib; sourceTree = "<group>"; };
 		070455C817C5A7F300C42D19 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		07D6FF0A187B477500DEAF12 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		07E0E6D4179AE9B000BB29C3 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		07E0E6D8179AEA5800BB29C3 /* Screen.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Screen.xcdatamodel; sourceTree = "<group>"; };
 		07E0E6DA179AEDCC00BB29C3 /* Candidate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Candidate.h; path = Model/Candidate.h; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				0700537B178609EE005D947E /* Model */,
 				070053341779D8A3005D947E /* ScreenAppDelegate.h */,
 				070053351779D8A3005D947E /* ScreenAppDelegate.m */,
+				07D6FF0A187B477500DEAF12 /* Images.xcassets */,
 				0700532C1779D8A3005D947E /* Supporting Files */,
 			);
 			path = Screen;
@@ -349,6 +352,7 @@
 				070053761785CB5F005D947E /* calendar.png in Resources */,
 				070053771785CB5F005D947E /* calendar@2x.png in Resources */,
 				070053781785CB5F005D947E /* people.png in Resources */,
+				07D6FF0B187B477500DEAF12 /* Images.xcassets in Resources */,
 				070053791785CB5F005D947E /* people@2x.png in Resources */,
 				0704557217BA689F00C42D19 /* 5starsgray.png in Resources */,
 				0704557417BA69BF00C42D19 /* 5starflip.png in Resources */,
@@ -482,7 +486,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -510,7 +514,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -523,6 +527,8 @@
 		070053691779D8A3005D947E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Screen/Screen-Prefix.pch";
 				INFOPLIST_FILE = "Screen/Screen-Info.plist";
@@ -534,6 +540,8 @@
 		0700536A1779D8A3005D947E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Screen/Screen-Prefix.pch";
 				INFOPLIST_FILE = "Screen/Screen-Info.plist";
