@@ -30,12 +30,13 @@
 		0704557017B986C500C42D19 /* StarRatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0704556F17B986C500C42D19 /* StarRatingView.m */; };
 		0704557217BA689F00C42D19 /* 5starsgray.png in Resources */ = {isa = PBXBuildFile; fileRef = 0704557117BA689F00C42D19 /* 5starsgray.png */; };
 		0704557417BA69BF00C42D19 /* 5starflip.png in Resources */ = {isa = PBXBuildFile; fileRef = 0704557317BA69BF00C42D19 /* 5starflip.png */; };
-		0704557817BC69B500C42D19 /* CandidateDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0704557717BC69B500C42D19 /* CandidateDetailViewController.m */; };
 		070455BB17C041D800C42D19 /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = 070455BA17C041D800C42D19 /* Question.m */; };
 		070455BE17C041D800C42D19 /* Interview.m in Sources */ = {isa = PBXBuildFile; fileRef = 070455BD17C041D800C42D19 /* Interview.m */; };
 		070455C517C5823200C42D19 /* TextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 070455C417C5823200C42D19 /* TextFieldTableViewCell.m */; };
 		070455C717C582B300C42D19 /* TextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 070455C617C582B300C42D19 /* TextFieldTableViewCell.xib */; };
 		070455C917C5A7F300C42D19 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 070455C817C5A7F300C42D19 /* EventKit.framework */; };
+		070BBBDA1897FFEA0061F546 /* CandidateDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070BBBD91897FFEA0061F546 /* CandidateDetailViewController.m */; };
+		070BBBDD189802D00061F546 /* CandidateDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070BBBDC189802D00061F546 /* CandidateDetailTableViewController.m */; };
 		07D6FF0B187B477500DEAF12 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07D6FF0A187B477500DEAF12 /* Images.xcassets */; };
 		07E0E6D5179AE9B000BB29C3 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E0E6D4179AE9B000BB29C3 /* CoreData.framework */; };
 		07E0E6D9179AEA5800BB29C3 /* Screen.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 07E0E6D7179AEA5800BB29C3 /* Screen.xcdatamodeld */; };
@@ -85,8 +86,6 @@
 		0704556F17B986C500C42D19 /* StarRatingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StarRatingView.m; path = View/StarRatingView.m; sourceTree = "<group>"; };
 		0704557117BA689F00C42D19 /* 5starsgray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5starsgray.png; sourceTree = "<group>"; };
 		0704557317BA69BF00C42D19 /* 5starflip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5starflip.png; sourceTree = "<group>"; };
-		0704557617BC69B500C42D19 /* CandidateDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CandidateDetailViewController.h; path = Controller/CandidateDetailViewController.h; sourceTree = "<group>"; };
-		0704557717BC69B500C42D19 /* CandidateDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CandidateDetailViewController.m; path = Controller/CandidateDetailViewController.m; sourceTree = "<group>"; };
 		070455B917C041D800C42D19 /* Question.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Question.h; path = Model/Question.h; sourceTree = "<group>"; };
 		070455BA17C041D800C42D19 /* Question.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Question.m; path = Model/Question.m; sourceTree = "<group>"; };
 		070455BC17C041D800C42D19 /* Interview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Interview.h; path = Model/Interview.h; sourceTree = "<group>"; };
@@ -96,6 +95,10 @@
 		070455C417C5823200C42D19 /* TextFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TextFieldTableViewCell.m; path = View/TextFieldTableViewCell.m; sourceTree = "<group>"; };
 		070455C617C582B300C42D19 /* TextFieldTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TextFieldTableViewCell.xib; path = View/TextFieldTableViewCell.xib; sourceTree = "<group>"; };
 		070455C817C5A7F300C42D19 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		070BBBD81897FFEA0061F546 /* CandidateDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CandidateDetailViewController.h; path = Controller/CandidateDetailViewController.h; sourceTree = "<group>"; };
+		070BBBD91897FFEA0061F546 /* CandidateDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CandidateDetailViewController.m; path = Controller/CandidateDetailViewController.m; sourceTree = "<group>"; };
+		070BBBDB189802D00061F546 /* CandidateDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CandidateDetailTableViewController.h; path = Controller/CandidateDetailTableViewController.h; sourceTree = "<group>"; };
+		070BBBDC189802D00061F546 /* CandidateDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CandidateDetailTableViewController.m; path = Controller/CandidateDetailTableViewController.m; sourceTree = "<group>"; };
 		07D6FF0A187B477500DEAF12 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		07E0E6D4179AE9B000BB29C3 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		07E0E6D8179AEA5800BB29C3 /* Screen.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Screen.xcdatamodel; sourceTree = "<group>"; };
@@ -259,8 +262,10 @@
 		0700537D17860A21005D947E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				0704557617BC69B500C42D19 /* CandidateDetailViewController.h */,
-				0704557717BC69B500C42D19 /* CandidateDetailViewController.m */,
+				070BBBDB189802D00061F546 /* CandidateDetailTableViewController.h */,
+				070BBBDC189802D00061F546 /* CandidateDetailTableViewController.m */,
+				070BBBD81897FFEA0061F546 /* CandidateDetailViewController.h */,
+				070BBBD91897FFEA0061F546 /* CandidateDetailViewController.m */,
 				07E0E6DD179B140300BB29C3 /* CandidateTableViewController.h */,
 				07E0E6E0179B293500BB29C3 /* CandidateTableViewController.m */,
 				9FA4E0E017C09C4B005F0035 /* InterviewDetailViewController.h */,
@@ -397,12 +402,13 @@
 				07E0E6DC179AEDCC00BB29C3 /* Candidate.m in Sources */,
 				07E0E6E1179B293500BB29C3 /* CandidateTableViewController.m in Sources */,
 				0704557017B986C500C42D19 /* StarRatingView.m in Sources */,
-				0704557817BC69B500C42D19 /* CandidateDetailViewController.m in Sources */,
 				070455BB17C041D800C42D19 /* Question.m in Sources */,
 				070455BE17C041D800C42D19 /* Interview.m in Sources */,
 				9FA4E0DF17C09BDD005F0035 /* InterviewTableViewController.m in Sources */,
 				9FA4E0E217C09C4B005F0035 /* InterviewDetailViewController.m in Sources */,
 				070455C517C5823200C42D19 /* TextFieldTableViewCell.m in Sources */,
+				070BBBDD189802D00061F546 /* CandidateDetailTableViewController.m in Sources */,
+				070BBBDA1897FFEA0061F546 /* CandidateDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
