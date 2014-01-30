@@ -37,6 +37,7 @@
 		070455C917C5A7F300C42D19 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 070455C817C5A7F300C42D19 /* EventKit.framework */; };
 		070BBBDA1897FFEA0061F546 /* CandidateDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070BBBD91897FFEA0061F546 /* CandidateDetailViewController.m */; };
 		070BBBDD189802D00061F546 /* CandidateDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070BBBDC189802D00061F546 /* CandidateDetailTableViewController.m */; };
+		070BBBE5189AD3C10061F546 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 070BBBE4189AD3C10061F546 /* NSString+MD5.m */; };
 		07D6FF0B187B477500DEAF12 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07D6FF0A187B477500DEAF12 /* Images.xcassets */; };
 		07E0E6D5179AE9B000BB29C3 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E0E6D4179AE9B000BB29C3 /* CoreData.framework */; };
 		07E0E6D9179AEA5800BB29C3 /* Screen.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 07E0E6D7179AEA5800BB29C3 /* Screen.xcdatamodeld */; };
@@ -99,6 +100,9 @@
 		070BBBD91897FFEA0061F546 /* CandidateDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CandidateDetailViewController.m; path = Controller/CandidateDetailViewController.m; sourceTree = "<group>"; };
 		070BBBDB189802D00061F546 /* CandidateDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CandidateDetailTableViewController.h; path = Controller/CandidateDetailTableViewController.h; sourceTree = "<group>"; };
 		070BBBDC189802D00061F546 /* CandidateDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CandidateDetailTableViewController.m; path = Controller/CandidateDetailTableViewController.m; sourceTree = "<group>"; };
+		070BBBE3189AD3C10061F546 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+MD5.h"; path = "Utilities/NSString+MD5.h"; sourceTree = "<group>"; };
+		070BBBE4189AD3C10061F546 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+MD5.m"; path = "Utilities/NSString+MD5.m"; sourceTree = "<group>"; };
+		070BBBE6189AD7C80061F546 /* Screen 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Screen 3.xcdatamodel"; sourceTree = "<group>"; };
 		07D6FF0A187B477500DEAF12 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		07E0E6D4179AE9B000BB29C3 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		07E0E6D8179AEA5800BB29C3 /* Screen.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Screen.xcdatamodel; sourceTree = "<group>"; };
@@ -174,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				07E0E6D7179AEA5800BB29C3 /* Screen.xcdatamodeld */,
+				070BBBE2189AD3770061F546 /* Utilities */,
 				0700537D17860A21005D947E /* Controller */,
 				0700537C17860A16005D947E /* View */,
 				0700537B178609EE005D947E /* Model */,
@@ -274,6 +279,15 @@
 				9FA4E0DE17C09BDD005F0035 /* InterviewTableViewController.m */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		070BBBE2189AD3770061F546 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				070BBBE3189AD3C10061F546 /* NSString+MD5.h */,
+				070BBBE4189AD3C10061F546 /* NSString+MD5.m */,
+			);
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -402,6 +416,7 @@
 				07E0E6DC179AEDCC00BB29C3 /* Candidate.m in Sources */,
 				07E0E6E1179B293500BB29C3 /* CandidateTableViewController.m in Sources */,
 				0704557017B986C500C42D19 /* StarRatingView.m in Sources */,
+				070BBBE5189AD3C10061F546 /* NSString+MD5.m in Sources */,
 				070455BB17C041D800C42D19 /* Question.m in Sources */,
 				070455BE17C041D800C42D19 /* Interview.m in Sources */,
 				9FA4E0DF17C09BDD005F0035 /* InterviewTableViewController.m in Sources */,
@@ -626,10 +641,11 @@
 		07E0E6D7179AEA5800BB29C3 /* Screen.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				070BBBE6189AD7C80061F546 /* Screen 3.xcdatamodel */,
 				070455BF17C0637100C42D19 /* Screen 2.xcdatamodel */,
 				07E0E6D8179AEA5800BB29C3 /* Screen.xcdatamodel */,
 			);
-			currentVersion = 070455BF17C0637100C42D19 /* Screen 2.xcdatamodel */;
+			currentVersion = 070BBBE6189AD7C80061F546 /* Screen 3.xcdatamodel */;
 			path = Screen.xcdatamodeld;
 			sourceTree = SOURCE_ROOT;
 			versionGroupType = wrapper.xcdatamodel;

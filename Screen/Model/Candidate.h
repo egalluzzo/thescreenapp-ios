@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSString *firstName;
 @property (nonatomic, retain) NSString *lastName;
 @property (nonatomic, retain) NSString *phone;
+@property (nonatomic, retain) NSString *email;
 @property (nonatomic, retain) NSNumber *rating;
 @property (nonatomic, retain) NSSet *interviews;
 

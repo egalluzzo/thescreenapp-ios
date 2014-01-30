@@ -15,6 +15,7 @@
 @dynamic firstName;
 @dynamic lastName;
 @dynamic phone;
+@dynamic email;
 @dynamic rating;
 @dynamic uuid;
 @dynamic interviews;

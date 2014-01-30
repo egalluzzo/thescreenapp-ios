@@ -11,7 +11,7 @@
 #import "Candidate.h"
 #import "StarRatingView.h"
 
-@interface CandidateDetailViewController : UIViewController <UISplitViewControllerDelegate, StarRatingViewDelegate>
+@interface CandidateDetailViewController : UIViewController <UISplitViewControllerDelegate, StarRatingViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property(nonatomic, strong) Candidate *candidate;
 
