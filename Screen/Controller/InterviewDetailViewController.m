@@ -89,7 +89,7 @@
     
     // Pop up the date picker when tapping the interview date.
     UITapGestureRecognizer *interviewDateTapGestureRecognizer =
-        [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDatePicker)];
+        [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showInterviewDatePicker)];
     [self.interviewDateLabel addGestureRecognizer:interviewDateTapGestureRecognizer];
     
     // Pop up the time picker when tapping the start time.
