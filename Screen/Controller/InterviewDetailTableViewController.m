@@ -2,31 +2,18 @@
 //  InterviewDetailViewController.m
 //  Screen
 //
-//  Created by Eric Galluzzo on 1/31/14.
-//  Copyright (c) 2014 Eric Galluzzo. All rights reserved.
+//  Created by Hitanshu Pande on 8/18/13.
+//  Copyright (c) 2013 Eric Galluzzo. All rights reserved.
 //
 
 #import <EventKit/EventKit.h>
 
-#import "InterviewDetailViewController.h"
-
-#import "Candidate.h"
-#import "Question.h"
+#import "InterviewDetailTableViewController.h"
 #import "TextFieldTableViewCell.h"
 
+#define QUESTIONS_SECTION 2
 
-@interface InterviewDetailViewController ()
-
-@property (nonatomic, weak) IBOutlet UILabel *candidateNameLabel;
-@property (nonatomic, weak) IBOutlet UILabel *interviewDateLabel;
-@property (nonatomic, weak) IBOutlet UILabel *startTimeLabel;
-@property (nonatomic, weak) IBOutlet UILabel *endTimeLabel;
-@property (nonatomic, weak) IBOutlet UITextField *locationField;
-@property (nonatomic, weak) IBOutlet UIButton *addToCalendarButton;
-
-@property (nonatomic, weak) IBOutlet UIButton *addQuestionButton;
-@property (nonatomic, weak) IBOutlet UIButton *editQuestionsButton;
-@property (nonatomic, weak) IBOutlet UITableView *questionTable;
+@interface InterviewDetailTableViewController ()
 
 @property (nonatomic, strong) UIPopoverController *masterPopoverController;
 @property (nonatomic, strong) UIPopoverController *datePopoverController;
@@ -41,20 +28,17 @@
 
 - (void)showAlertWithTitle:title message:message;
 
-- (void)showInterviewDatePicker;
-- (void)showStartTimePicker;
-- (void)showEndTimePicker;
-- (void)showDatePickerWithDate:(NSDate *)date mode:(UIDatePickerMode)mode action:(SEL)action;
-- (void)getInterviewDateFromPicker:(id)sender;
-- (void)getEndTimeFromPicker:(id)sender;
 @end
 
 
-@implementation InterviewDetailViewController
+@implementation InterviewDetailTableViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+@synthesize interview = _interview;
+@synthesize sortedQuestions = _sortedQuestions;
+
+- (id)initWithStyle:(UITableViewStyle)style
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
     }
@@ -88,24 +72,13 @@
                  forControlEvents:UIControlEventEditingChanged];
     
     // Pop up the date picker when tapping the interview date.
-    UITapGestureRecognizer *interviewDateTapGestureRecognizer =
+    UITapGestureRecognizer *tapGesture =
         [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDatePicker)];
-    [self.interviewDateLabel addGestureRecognizer:interviewDateTapGestureRecognizer];
-    
-    // Pop up the time picker when tapping the start time.
-    UITapGestureRecognizer *startTimeTapGestureRecognizer =
-        [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showStartTimePicker)];
-    [self.startTimeLabel addGestureRecognizer:startTimeTapGestureRecognizer];
-    
-    // Pop up the time picker when tapping the end time.
-    // FIXME: Implement duration
-//    UITapGestureRecognizer *endTimeTapGestureRecognizer =
-//        [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showEndTimePicker)];
-//    [self.endTimeLabel addGestureRecognizer:endTimeTapGestureRecognizer];
-    
+    [self.dateLabel addGestureRecognizer:tapGesture];
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
-    
+ 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
@@ -121,7 +94,7 @@
     if (_interview != interview) {
         _interview = interview;
         [self configureView];
-        [self.questionTable reloadData];
+        [[self tableView] reloadData];
     }
     
     if (self.masterPopoverController != nil) {
@@ -151,8 +124,8 @@
         [self reloadDateLabel];
         
         // Reload the interviews in case they have changed.
-        self.sortedQuestions = [self.interview.questions sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"question" ascending:NO]]];
-        [self.questionTable reloadData];
+        _sortedQuestions = [self.interview.questions sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"question" ascending:NO]]];
+        [[self tableView] reloadData];
     }
 }
 
@@ -229,19 +202,22 @@
     [self.interview addQuestionsObject:question];
     [self saveInterview];
     
-    self.sortedQuestions = [self.interview.questions sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"question" ascending:NO]]];
+    _sortedQuestions = [self.interview.questions sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"question" ascending:NO]]];
     
-    NSInteger row = [self.sortedQuestions indexOfObject:question];
-    NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:row inSection:0];
-    [self.questionTable insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    // Note: I tried just inserting a single index path here but it
+    // sometimes got confused and drew cells in different sections
+    // over top of each other, probably due to the static/dynamic
+    // nature of the table.
+    [[self tableView] reloadSections:[NSIndexSet indexSetWithIndex:QUESTIONS_SECTION]
+                    withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (void)editQuestions
 {
     // Doesn't work yet
-    //    self.editing = !self.editing;
-    //    [self.editQuestionsButton setTitle:(self.editing ? @"Done" : @"Edit")
-    //                              forState:UIControlStateNormal | UIControlStateSelected | UIControlStateHighlighted | UIControlStateDisabled];
+//    self.editing = !self.editing;
+//    [self.editQuestionsButton setTitle:(self.editing ? @"Done" : @"Edit")
+//                              forState:UIControlStateNormal | UIControlStateSelected | UIControlStateHighlighted | UIControlStateDisabled];
 }
 
 - (void)reloadDateLabel
@@ -250,85 +226,43 @@
     static NSDateFormatter *dateFormatter = nil;
     if (dateFormatter == nil) {
         dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-        [dateFormatter setDateStyle:NSDateFormatterLongStyle];
+        [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     }
-    
-    static NSDateFormatter *timeFormatter = nil;
-    if (timeFormatter == nil) {
-        timeFormatter = [[NSDateFormatter alloc] init];
-        [timeFormatter setTimeStyle:NSDateFormatterShortStyle];
-        [timeFormatter setDateStyle:NSDateFormatterNoStyle];
-    }
-    
-    self.interviewDateLabel.text = [dateFormatter stringFromDate:self.interview.interviewDate];
-    self.startTimeLabel.text = [timeFormatter stringFromDate:self.interview.interviewDate];
-    // FIXME: Need a duration to populate the end time
-    //self.endTimeLabel.text = [dateFormatter stringFromDate:self.interview.interviewDate];
+    self.dateLabel.text = [dateFormatter stringFromDate:self.interview.interviewDate];
 }
 
-- (void)showInterviewDatePicker
-{
-    [self showDatePickerWithDate:self.interview.interviewDate
-                            mode:UIDatePickerModeDate
-                          action:@selector(getInterviewDateFromPicker:)];
-}
-
-- (void)getInterviewDateFromPicker:(id)sender
-{
-    UIDatePicker *picker = (UIDatePicker *)sender;
-    self.interview.interviewDate = picker.date;
-    [self reloadDateLabel];
-    [self saveInterview];
-}
-
-- (void)showStartTimePicker
-{
-    [self showDatePickerWithDate:self.interview.interviewDate
-                            mode:UIDatePickerModeTime
-                          action:@selector(getInterviewDateFromPicker:)];
-}
-
-- (void)showEndTimePicker
-{
-    // FIXME: Use the actual duration when we have one.
-    NSDate *endDate = [self.interview.interviewDate dateByAddingTimeInterval:60*60];
-    [self showDatePickerWithDate:endDate
-                            mode:UIDatePickerModeTime
-                          action:@selector(getEndTimeFromPicker:)];
-}
-
-- (void)getEndTimeFromPicker:(id)sender
-{
-    //UIDatePicker *picker = (UIDatePicker *)sender;
-    // FIXME: Populate the duration when we have one.
-    [self reloadDateLabel];
-    [self saveInterview];
-}
-
-- (void)showDatePickerWithDate:(NSDate *)date mode:(UIDatePickerMode)mode action:(SEL)action
+- (void)showDatePicker
 {
     // Code adapted from http://stackoverflow.com/questions/7341835/uidatepicker-in-uipopover?rq=1
     UIViewController* popoverContent = [[UIViewController alloc] init]; //ViewController
     
     UIView *popoverView = [[UIView alloc] init];
+    popoverView.backgroundColor = [UIColor blackColor];
     
     UIDatePicker *datePicker = [[UIDatePicker alloc] init];
-    datePicker.date = date;
-    datePicker.datePickerMode = mode;
+    datePicker.date = self.interview.interviewDate;
+    datePicker.frame = CGRectMake(0,44,320, 216);
+    datePicker.datePickerMode = UIDatePickerModeDateAndTime;
     [datePicker setMinuteInterval:5];
-    [datePicker addTarget:self action:action forControlEvents:UIControlEventValueChanged];
+    [datePicker setTag:10];
+    [datePicker addTarget:self action:@selector(getDateFromPicker:) forControlEvents:UIControlEventValueChanged];
     [popoverView addSubview:datePicker];
     
     popoverContent.view = popoverView;
     self.datePopoverController = [[UIPopoverController alloc] initWithContentViewController:popoverContent];
     //popoverController.delegate=self;
     
-    [self.datePopoverController setPopoverContentSize:datePicker.frame.size animated:NO];
-    [self.datePopoverController presentPopoverFromRect:self.interviewDateLabel.frame
-                                                inView:self.view
-                              permittedArrowDirections:UIPopoverArrowDirectionAny
-                                              animated:YES];
+    [self.datePopoverController setPopoverContentSize:CGSizeMake(320, 264) animated:NO];
+    [self.datePopoverController presentPopoverFromRect:self.dateLabel.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+- (void)getDateFromPicker:(id)sender
+{
+    UIDatePicker *picker = (UIDatePicker *)sender;
+    self.interview.interviewDate = picker.date;
+    [self reloadDateLabel];
+    [self saveInterview];
 }
 
 #pragma mark - Table view data source
@@ -339,36 +273,44 @@
     if (self.interview == nil) {
         return 0;
     } else {
-        return 1;
+        return [super numberOfSectionsInTableView:tableView];
     }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (self.interview) {
-        return self.sortedQuestions.count;
+    // Return the number of rows in the section.
+    if (section == QUESTIONS_SECTION) {
+        if (self.interview) {
+            return self.sortedQuestions.count;
+        } else {
+            return 0;
+        }
     } else {
-        return 0;
+        return [super tableView:tableView numberOfRowsInSection:section];
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    TextFieldTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TextFieldTableViewCell"];
-    if (cell == nil) {
-        // Find the table cell out of the NIB.
-        NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"TextFieldTableViewCell" owner:nil options:nil];
-        for (UIView *view in views) {
-            if([view isKindOfClass:[UITableViewCell class]]) {
-                cell = (TextFieldTableViewCell *)view;
+    if (indexPath.section == QUESTIONS_SECTION) {
+        TextFieldTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TextFieldTableViewCell"];
+        if (cell == nil) {
+            // Find the table cell out of the NIB.
+            NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"TextFieldTableViewCell" owner:nil options:nil];
+            for (UIView *view in views) {
+                if([view isKindOfClass:[UITableViewCell class]]) {
+                    cell = (TextFieldTableViewCell *)view;
+                }
             }
+            cell.textField.delegate = self;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        cell.textField.placeholder = @"Question";
-        cell.textField.delegate = self;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [self configureQuestionCell:cell cellForRowAtIndexPath:indexPath];
+        return cell;
+    } else {
+        return [super tableView:tableView cellForRowAtIndexPath:indexPath];
     }
-    [self configureQuestionCell:cell cellForRowAtIndexPath:indexPath];
-    return cell;
 }
 
 - (void)configureQuestionCell:(TextFieldTableViewCell *)cell cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -377,29 +319,59 @@
     cell.textField.text = question.question;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    int section = indexPath.section;
+    
+    // if dynamic section make all rows the same height as row 0
+    if (section == QUESTIONS_SECTION) {
+        return [super tableView:tableView heightForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
+    } else {
+        return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+    }
+}
+
+- (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    int section = indexPath.section;
+    
+    // if dynamic section make all rows the same indentation level as row 0
+    if (section == QUESTIONS_SECTION) {
+        return [super tableView:tableView indentationLevelForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
+    } else {
+        return [super tableView:tableView indentationLevelForRowAtIndexPath:indexPath];
+    }
+}
+
 -(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return UITableViewCellEditingStyleDelete;
+    if (indexPath.section == QUESTIONS_SECTION) {
+        return UITableViewCellEditingStyleDelete;
+    } else {
+        return UITableViewCellEditingStyleNone;
+    }
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return YES;
+    return (indexPath.section == QUESTIONS_SECTION);
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Question *question = nil;
-    switch (editingStyle) {
-        case UITableViewCellEditingStyleDelete:
-            question = [self.sortedQuestions objectAtIndex:indexPath.row];
-            [self.interview removeQuestionsObject:question];
-            [self saveInterview];
-            [self.questionTable deleteRowsAtIndexPaths:@[indexPath]
-                                      withRowAnimation:UITableViewRowAnimationAutomatic];
-            break;
-        default:
-            break;
+    if (indexPath.section == QUESTIONS_SECTION) {
+        switch (editingStyle) {
+            case UITableViewCellEditingStyleDelete:
+                question = [self.sortedQuestions objectAtIndex:indexPath.row];
+                [self.interview removeQuestionsObject:question];
+                [self saveInterview];
+                [[self tableView] reloadSections:[NSIndexSet indexSetWithIndex:QUESTIONS_SECTION]
+                                withRowAnimation:UITableViewRowAnimationAutomatic];
+                break;
+            default:
+                break;
+        }
     }
 }
 
@@ -447,37 +419,26 @@
 - (void) textFieldDidEndEditing:(UITextField *)textField
 {
     // this should return you your current indexPath
-    NSIndexPath *indexPath = [self indexPathForQuestionTextField:textField];
-    Question *question = [self.sortedQuestions objectAtIndex:indexPath.row];
-    question.question = textField.text;
-    
-    NSError *error;
-    if ([question.managedObjectContext hasChanges] && ![question.managedObjectContext save:&error]) {
-        // FIXME: Need a better error handling mechanism...
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:(TextFieldTableViewCell*)[[textField superview] superview]];
+    if (indexPath.section == QUESTIONS_SECTION) {
+        Question *question = [self.sortedQuestions objectAtIndex:indexPath.row];
+        question.question = textField.text;
+        
+        NSError *error;
+        if ([question.managedObjectContext hasChanges] && ![question.managedObjectContext save:&error]) {
+            // FIXME: Need a better error handling mechanism...
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        }
     }
 }
 
 - (void) textFieldDidBeginEditing:(UITextField *)textField
 {
-    NSIndexPath *cellIndexPath = [self indexPathForQuestionTextField:textField];
-    [self.questionTable scrollToRowAtIndexPath:cellIndexPath
+    TextFieldTableViewCell *cell = (TextFieldTableViewCell *) [[textField superview] superview];
+    [self.tableView scrollToRowAtIndexPath:[self.tableView indexPathForCell:cell]
                           atScrollPosition:UITableViewScrollPositionMiddle
                                   animated:YES];
-}
-
-- (NSIndexPath *)indexPathForQuestionTextField:(UITextField *)textField
-{
-    UIView *view = [textField superview];
-    while (view != nil && ![view isKindOfClass:[TextFieldTableViewCell class]]) {
-        view = [view superview];
-    }
-    if (view == nil) {
-        return nil;
-    } else {
-        return [self.questionTable indexPathForCell:(TextFieldTableViewCell *)view];
-    }
 }
 
 @end

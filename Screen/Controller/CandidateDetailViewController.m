@@ -135,13 +135,19 @@
                                                             selector:@selector(requestAvatarWithTimer:)
                                                             userInfo:nil
                                                              repeats:NO];
+    [self saveCandidate];
 }
 
 - (void)requestAvatarWithTimer:(NSTimer *)timer
 {
+    // We request an image with twice the height of the frame so that it looks nice
+    // on Retina displays.  The default image if the user has no Gravatar is "mm",
+    // which is a built-in Gravatar image of a "mystery man" (silhouette of a
+    // cartoon-ish headshot).
+    
     NSString *emailMD5Hash = [[self.emailField.text lowercaseString] MD5];
     NSString *gravatarURL = [NSString stringWithFormat:@"http://www.gravatar.com/avatar/%@?s=%d&d=mm",
-                             emailMD5Hash, (int)self.avatarImageView.frame.size.height];
+                             emailMD5Hash, (int)(self.avatarImageView.frame.size.height * 2)];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:gravatarURL]];
     
     [NSURLConnection sendAsynchronousRequest:request

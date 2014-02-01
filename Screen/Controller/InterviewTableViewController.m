@@ -6,8 +6,10 @@
 //  Copyright (c) 2013 Eric Galluzzo. All rights reserved.
 //
 
-#import "Interview.h"
 #import "InterviewTableViewController.h"
+
+#import "Candidate.h"
+#import "Interview.h"
 #import "InterviewDetailViewController.h"
 #import "ScreenAppDelegate.h"
 
