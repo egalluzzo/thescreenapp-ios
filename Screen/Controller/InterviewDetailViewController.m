@@ -13,6 +13,7 @@
 #import "Candidate.h"
 #import "Question.h"
 #import "TextFieldTableViewCell.h"
+#import "UINavigationBar+TintSettings.h"
 
 
 @interface InterviewDetailViewController ()
@@ -70,6 +71,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.navigationController.navigationBar useScreenAppTintColor];
     
     [self.addToCalendarButton addTarget:self
                                  action:@selector(addToCalendar)

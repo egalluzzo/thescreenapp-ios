@@ -7,8 +7,10 @@
 //
 
 #import "CandidateDetailTableViewController.h"
+
 #import "InterviewDetailViewController.h"
 #import "Interview.h"
+#import "UINavigationBar+TintSettings.h"
 
 #define INTERVIEW_SECTION 1
 
@@ -105,6 +107,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.navigationController.navigationBar useScreenAppTintColor];
     
     self.interviewDetailViewController =
         [self.storyboard instantiateViewControllerWithIdentifier:@"InterviewDetailViewController"];

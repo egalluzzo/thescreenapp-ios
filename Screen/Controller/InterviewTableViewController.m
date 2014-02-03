@@ -12,6 +12,7 @@
 #import "Interview.h"
 #import "InterviewDetailViewController.h"
 #import "ScreenAppDelegate.h"
+#import "UINavigationBar+TintSettings.h"
 
 @interface InterviewTableViewController ()
 
@@ -46,7 +47,8 @@
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
-    // Set up the buttons.
+    // Set up the navigation bar.
+    [self.navigationController.navigationBar useScreenAppTintColor];
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
     self.detailViewController = (InterviewDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];

@@ -45,6 +45,7 @@
 		07E0E6E1179B293500BB29C3 /* CandidateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07E0E6E0179B293500BB29C3 /* CandidateTableViewController.m */; };
 		07EBF013189C12BC00AA9C26 /* InterviewDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EBF012189C12BC00AA9C26 /* InterviewDetailTableViewController.m */; };
 		07EBF016189C12E100AA9C26 /* InterviewDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EBF015189C12E100AA9C26 /* InterviewDetailViewController.m */; };
+		07EBF019189FE03800AA9C26 /* UINavigationBar+TintSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EBF018189FE03800AA9C26 /* UINavigationBar+TintSettings.m */; };
 		9FA4E0DF17C09BDD005F0035 /* InterviewTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA4E0DE17C09BDD005F0035 /* InterviewTableViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -115,6 +116,8 @@
 		07EBF012189C12BC00AA9C26 /* InterviewDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InterviewDetailTableViewController.m; path = Controller/InterviewDetailTableViewController.m; sourceTree = "<group>"; };
 		07EBF014189C12E100AA9C26 /* InterviewDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InterviewDetailViewController.h; path = Controller/InterviewDetailViewController.h; sourceTree = "<group>"; };
 		07EBF015189C12E100AA9C26 /* InterviewDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InterviewDetailViewController.m; path = Controller/InterviewDetailViewController.m; sourceTree = "<group>"; };
+		07EBF017189FE03800AA9C26 /* UINavigationBar+TintSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UINavigationBar+TintSettings.h"; path = "Utilities/UINavigationBar+TintSettings.h"; sourceTree = "<group>"; };
+		07EBF018189FE03800AA9C26 /* UINavigationBar+TintSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UINavigationBar+TintSettings.m"; path = "Utilities/UINavigationBar+TintSettings.m"; sourceTree = "<group>"; };
 		9FA4E0DD17C09BDD005F0035 /* InterviewTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InterviewTableViewController.h; path = Controller/InterviewTableViewController.h; sourceTree = "<group>"; };
 		9FA4E0DE17C09BDD005F0035 /* InterviewTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InterviewTableViewController.m; path = Controller/InterviewTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -291,6 +294,8 @@
 			children = (
 				070BBBE3189AD3C10061F546 /* NSString+MD5.h */,
 				070BBBE4189AD3C10061F546 /* NSString+MD5.m */,
+				07EBF017189FE03800AA9C26 /* UINavigationBar+TintSettings.h */,
+				07EBF018189FE03800AA9C26 /* UINavigationBar+TintSettings.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -422,6 +427,7 @@
 				07E0E6DC179AEDCC00BB29C3 /* Candidate.m in Sources */,
 				07E0E6E1179B293500BB29C3 /* CandidateTableViewController.m in Sources */,
 				0704557017B986C500C42D19 /* StarRatingView.m in Sources */,
+				07EBF019189FE03800AA9C26 /* UINavigationBar+TintSettings.m in Sources */,
 				070BBBE5189AD3C10061F546 /* NSString+MD5.m in Sources */,
 				070455BB17C041D800C42D19 /* Question.m in Sources */,
 				070455BE17C041D800C42D19 /* Interview.m in Sources */,

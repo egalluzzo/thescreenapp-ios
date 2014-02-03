@@ -6,9 +6,11 @@
 //  Copyright (c) 2013 Eric Galluzzo. All rights reserved.
 //
 
-#import "Candidate.h"
 #import "CandidateTableViewController.h"
+
+#import "Candidate.h"
 #import "ScreenAppDelegate.h"
+#import "UINavigationBar+TintSettings.h"
 
 @interface CandidateTableViewController ()
 
@@ -44,7 +46,9 @@
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
-    // Set up the buttons.
+    // Set up the navigation bar.
+    // FIXME: Find some common place to put this color.
+    [self.navigationController.navigationBar useScreenAppTintColor];
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
     addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd

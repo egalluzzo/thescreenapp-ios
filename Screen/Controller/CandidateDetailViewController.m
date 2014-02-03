@@ -6,9 +6,11 @@
 //  Copyright (c) 2014 Eric Galluzzo. All rights reserved.
 //
 
-#import "NSString+MD5.h"
 #import "CandidateDetailViewController.h"
+
 #import "InterviewDetailViewController.h"
+#import "NSString+MD5.h"
+#import "UINavigationBar+TintSettings.h"
 
 // The number of seconds between the time the user changes the email address and the time we re-request the Gravatar image
 #define EMAIL_CHANGE_IMAGE_DELAY 0.5
@@ -166,6 +168,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.navigationController.navigationBar useScreenAppTintColor];
     
     self.interviewDetailViewController =
         [self.storyboard instantiateViewControllerWithIdentifier:@"InterviewDetailViewController"];

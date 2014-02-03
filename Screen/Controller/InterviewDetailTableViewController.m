@@ -9,7 +9,9 @@
 #import <EventKit/EventKit.h>
 
 #import "InterviewDetailTableViewController.h"
+
 #import "TextFieldTableViewCell.h"
+#import "UINavigationBar+TintSettings.h"
 
 #define QUESTIONS_SECTION 2
 
@@ -54,6 +56,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    [self.navigationController.navigationBar useScreenAppTintColor];
     
     [self.addToCalendarButton addTarget:self
                                  action:@selector(addToCalendar)
