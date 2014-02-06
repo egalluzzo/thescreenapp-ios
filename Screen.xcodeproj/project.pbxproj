@@ -118,6 +118,7 @@
 		07EBF015189C12E100AA9C26 /* InterviewDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InterviewDetailViewController.m; path = Controller/InterviewDetailViewController.m; sourceTree = "<group>"; };
 		07EBF017189FE03800AA9C26 /* UINavigationBar+TintSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UINavigationBar+TintSettings.h"; path = "Utilities/UINavigationBar+TintSettings.h"; sourceTree = "<group>"; };
 		07EBF018189FE03800AA9C26 /* UINavigationBar+TintSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UINavigationBar+TintSettings.m"; path = "Utilities/UINavigationBar+TintSettings.m"; sourceTree = "<group>"; };
+		07EBF01A18A2D25900AA9C26 /* Screen 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Screen 4.xcdatamodel"; sourceTree = "<group>"; };
 		9FA4E0DD17C09BDD005F0035 /* InterviewTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InterviewTableViewController.h; path = Controller/InterviewTableViewController.h; sourceTree = "<group>"; };
 		9FA4E0DE17C09BDD005F0035 /* InterviewTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InterviewTableViewController.m; path = Controller/InterviewTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -653,11 +654,12 @@
 		07E0E6D7179AEA5800BB29C3 /* Screen.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				07EBF01A18A2D25900AA9C26 /* Screen 4.xcdatamodel */,
 				070BBBE6189AD7C80061F546 /* Screen 3.xcdatamodel */,
 				070455BF17C0637100C42D19 /* Screen 2.xcdatamodel */,
 				07E0E6D8179AEA5800BB29C3 /* Screen.xcdatamodel */,
 			);
-			currentVersion = 070BBBE6189AD7C80061F546 /* Screen 3.xcdatamodel */;
+			currentVersion = 07EBF01A18A2D25900AA9C26 /* Screen 4.xcdatamodel */;
 			path = Screen.xcdatamodeld;
 			sourceTree = SOURCE_ROOT;
 			versionGroupType = wrapper.xcdatamodel;

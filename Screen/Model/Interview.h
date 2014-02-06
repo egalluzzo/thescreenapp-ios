@@ -17,8 +17,13 @@
 @property (nonatomic, retain) NSString *uuid;
 @property (nonatomic, retain) NSString *location;
 @property (nonatomic, retain) NSDate *interviewDate;
+@property (nonatomic, retain) NSNumber *durationInMinutes;
+@property (nonatomic, retain) NSString *eventIdentifier;
 @property (nonatomic, retain) Candidate *candidate;
 @property (nonatomic, retain) NSSet *questions;
+
+@property (nonatomic, readonly) NSArray *sortedQuestions;
+
 @end
 
 @interface Interview (CoreDataGeneratedAccessors)

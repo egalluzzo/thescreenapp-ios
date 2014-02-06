@@ -45,9 +45,12 @@
 - (void)showInterviewDatePicker;
 - (void)showStartTimePicker;
 - (void)showEndTimePicker;
-- (void)showDatePickerWithDate:(NSDate *)date mode:(UIDatePickerMode)mode action:(SEL)action;
+- (void)showDatePickerWithDate:(NSDate *)date mode:(UIDatePickerMode)mode action:(SEL)action fromView:(UIView *)view;
 - (void)getInterviewDateFromPicker:(id)sender;
 - (void)getEndTimeFromPicker:(id)sender;
+
+- (void)saveInterviewWithoutSavingToCalendar;
+
 @end
 
 
@@ -101,10 +104,9 @@
     [self.startTimeLabel addGestureRecognizer:startTimeTapGestureRecognizer];
     
     // Pop up the time picker when tapping the end time.
-    // FIXME: Implement duration
-//    UITapGestureRecognizer *endTimeTapGestureRecognizer =
-//        [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showEndTimePicker)];
-//    [self.endTimeLabel addGestureRecognizer:endTimeTapGestureRecognizer];
+    UITapGestureRecognizer *endTimeTapGestureRecognizer =
+        [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showEndTimePicker)];
+    [self.endTimeLabel addGestureRecognizer:endTimeTapGestureRecognizer];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -132,7 +134,7 @@
     }
 }
 
-- (void)saveInterview
+- (void)saveInterviewWithoutSavingToCalendar
 {
     if (self.interview != nil) {
         self.interview.location = self.locationField.text;
@@ -146,6 +148,18 @@
     }
 }
 
+- (void)saveInterview
+{
+    [self saveInterviewWithoutSavingToCalendar];
+    if (self.interview.eventIdentifier != nil) {
+        EKEventStore *eventStore = [[EKEventStore alloc] init];
+        EKEvent *event = [eventStore eventWithIdentifier:self.interview.eventIdentifier];
+        if (event != nil) {
+            [self saveEvent:event withEventStore:eventStore];
+        }
+    }
+}
+
 - (void)configureView
 {
     if (self.interview != nil) {
@@ -154,7 +168,7 @@
         [self reloadDateLabel];
         
         // Reload the interviews in case they have changed.
-        self.sortedQuestions = [self.interview.questions sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"question" ascending:NO]]];
+        self.sortedQuestions = self.interview.sortedQuestions;
         [self.questionTable reloadData];
     }
 }
@@ -196,10 +210,20 @@
     EKEventStore *eventStore = [[EKEventStore alloc] init];
     
     EKEvent *event = [EKEvent eventWithEventStore:eventStore];
+    [self saveEvent:event withEventStore:eventStore];
+    
+    self.interview.eventIdentifier = event.eventIdentifier;
+    [self saveInterviewWithoutSavingToCalendar];
+    
+    [self showAlertWithTitle:@"Interview Added" message:@"The interview has been added to your calendar."];
+}
+
+- (void)saveEvent:(EKEvent *)event withEventStore:(EKEventStore *)eventStore
+{
     event.title = [NSString stringWithFormat:@"Interview for %@", self.interview.candidate.fullName];
     
     event.startDate = self.interview.interviewDate;
-    event.endDate = [self.interview.interviewDate dateByAddingTimeInterval:60*60];
+    event.endDate = [self.interview.interviewDate dateByAddingTimeInterval:[self.interview.durationInMinutes intValue] * 60.0];
     event.location = self.interview.location;
     
     [event setCalendar:[eventStore defaultCalendarForNewEvents]];
@@ -209,8 +233,6 @@
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
-    
-    [self showAlertWithTitle:@"Interview Added" message:@"The interview has been added to your calendar."];
 }
 
 - (void)showAlertWithTitle:title message:message
@@ -232,7 +254,7 @@
     [self.interview addQuestionsObject:question];
     [self saveInterview];
     
-    self.sortedQuestions = [self.interview.questions sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"question" ascending:NO]]];
+    self.sortedQuestions = self.interview.sortedQuestions;
     
     NSInteger row = [self.sortedQuestions indexOfObject:question];
     NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:row inSection:0];
@@ -264,17 +286,18 @@
         [timeFormatter setDateStyle:NSDateFormatterNoStyle];
     }
     
+    NSDate *endDate = [self.interview.interviewDate dateByAddingTimeInterval:[self.interview.durationInMinutes intValue] * 60.0];
     self.interviewDateLabel.text = [dateFormatter stringFromDate:self.interview.interviewDate];
     self.startTimeLabel.text = [timeFormatter stringFromDate:self.interview.interviewDate];
-    // FIXME: Need a duration to populate the end time
-    //self.endTimeLabel.text = [dateFormatter stringFromDate:self.interview.interviewDate];
+    self.endTimeLabel.text = [timeFormatter stringFromDate:endDate];
 }
 
 - (void)showInterviewDatePicker
 {
     [self showDatePickerWithDate:self.interview.interviewDate
                             mode:UIDatePickerModeDate
-                          action:@selector(getInterviewDateFromPicker:)];
+                          action:@selector(getInterviewDateFromPicker:)
+                        fromView:self.interviewDateLabel];
 }
 
 - (void)getInterviewDateFromPicker:(id)sender
@@ -289,27 +312,30 @@
 {
     [self showDatePickerWithDate:self.interview.interviewDate
                             mode:UIDatePickerModeTime
-                          action:@selector(getInterviewDateFromPicker:)];
+                          action:@selector(getInterviewDateFromPicker:)
+                        fromView:self.startTimeLabel];
 }
 
 - (void)showEndTimePicker
 {
-    // FIXME: Use the actual duration when we have one.
-    NSDate *endDate = [self.interview.interviewDate dateByAddingTimeInterval:60*60];
+    NSDate *endDate = [self.interview.interviewDate dateByAddingTimeInterval:[self.interview.durationInMinutes intValue] * 60.0];
     [self showDatePickerWithDate:endDate
                             mode:UIDatePickerModeTime
-                          action:@selector(getEndTimeFromPicker:)];
+                          action:@selector(getEndTimeFromPicker:)
+                        fromView:self.endTimeLabel];
 }
 
 - (void)getEndTimeFromPicker:(id)sender
 {
-    //UIDatePicker *picker = (UIDatePicker *)sender;
-    // FIXME: Populate the duration when we have one.
+    UIDatePicker *picker = (UIDatePicker *)sender;
+    // FIXME: This will probably return a negative number if the interview spans
+    //        a date boundary, although I think that should be rare.
+    self.interview.durationInMinutes = [NSNumber numberWithInteger:(NSInteger)([picker.date timeIntervalSinceDate:self.interview.interviewDate] / 60.0)];
     [self reloadDateLabel];
     [self saveInterview];
 }
 
-- (void)showDatePickerWithDate:(NSDate *)date mode:(UIDatePickerMode)mode action:(SEL)action
+- (void)showDatePickerWithDate:(NSDate *)date mode:(UIDatePickerMode)mode action:(SEL)action fromView:(UIView *)view
 {
     // Code adapted from http://stackoverflow.com/questions/7341835/uidatepicker-in-uipopover?rq=1
     UIViewController* popoverContent = [[UIViewController alloc] init]; //ViewController
@@ -328,7 +354,7 @@
     //popoverController.delegate=self;
     
     [self.datePopoverController setPopoverContentSize:datePicker.frame.size animated:NO];
-    [self.datePopoverController presentPopoverFromRect:self.interviewDateLabel.frame
+    [self.datePopoverController presentPopoverFromRect:view.frame
                                                 inView:self.view
                               permittedArrowDirections:UIPopoverArrowDirectionAny
                                               animated:YES];

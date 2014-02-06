@@ -15,6 +15,7 @@
 @dynamic uuid;
 @dynamic question;
 @dynamic notes;
+@dynamic sortOrder;
 @dynamic interview;
 
 - (void)awakeFromInsert

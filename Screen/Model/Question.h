@@ -17,6 +17,7 @@
 @property (nonatomic, retain) NSString *uuid;
 @property (nonatomic, retain) NSString *question;
 @property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSNumber *sortOrder;
 @property (nonatomic, retain) Interview *interview;
 
 @end
