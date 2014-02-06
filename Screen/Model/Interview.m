@@ -56,7 +56,7 @@
 
 - (NSArray *)sortedQuestions
 {
-    return [self.questions sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"sortOrder" ascending:NO]]];
+    return [self.questions sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"sortOrder" ascending:YES]]];
 }
 
 - (void)normalizeQuestionSortOrders

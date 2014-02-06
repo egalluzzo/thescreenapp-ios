@@ -29,13 +29,11 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="4" secondAttribute="bottom" constant="8" id="5HH-nS-Snq"/>
+                    <constraint firstItem="4" firstAttribute="leading" secondItem="1sb-gT-nGi" secondAttribute="leading" constant="20" id="D3x-mV-rn6"/>
+                    <constraint firstAttribute="trailing" secondItem="4" secondAttribute="trailing" constant="20" id="Ojz-Ia-huq"/>
                     <constraint firstItem="4" firstAttribute="top" secondItem="1sb-gT-nGi" secondAttribute="top" constant="8" id="XM7-Hq-Efa"/>
                 </constraints>
             </tableViewCellContentView>
-            <constraints>
-                <constraint firstItem="4" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" id="MO9-Ub-4VI"/>
-                <constraint firstAttribute="trailing" secondItem="4" secondAttribute="trailing" constant="20" id="loV-pI-H9y"/>
-            </constraints>
             <connections>
                 <outlet property="textField" destination="4" id="10"/>
             </connections>

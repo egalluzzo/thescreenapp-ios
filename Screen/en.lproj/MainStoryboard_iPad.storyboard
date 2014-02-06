@@ -761,7 +761,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P2p-Fh-Dgq">
-                                <rect key="frame" x="636" y="84" width="112" height="30"/>
+                                <rect key="frame" x="594" y="84" width="154" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Add to Calendar">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -815,11 +815,18 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Acy-n3-0fi">
-                                <rect key="frame" x="675" y="187" width="73" height="30"/>
+                                <rect key="frame" x="594" y="187" width="73" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="73" id="2pH-Lo-zYs"/>
                                 </constraints>
                                 <state key="normal" title="Add"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qhJ-dU-d6L">
+                                <rect key="frame" x="675" y="187" width="73" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="73" id="szr-ym-ldd"/>
+                                </constraints>
+                                <state key="normal" title="Edit"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -827,8 +834,10 @@
                             <constraint firstAttribute="trailing" secondItem="8oP-Ad-EMI" secondAttribute="trailing" constant="20" symbolic="YES" id="0tP-V4-C4e"/>
                             <constraint firstItem="Acy-n3-0fi" firstAttribute="baseline" secondItem="bVg-cu-15y" secondAttribute="baseline" id="1lN-Yj-epL"/>
                             <constraint firstItem="yyB-II-iHc" firstAttribute="leading" secondItem="Puu-o7-7qG" secondAttribute="trailing" id="1sW-I0-VYe"/>
+                            <constraint firstItem="P2p-Fh-Dgq" firstAttribute="leading" secondItem="Acy-n3-0fi" secondAttribute="leading" id="2ys-ys-Ofi"/>
                             <constraint firstItem="bVg-cu-15y" firstAttribute="top" secondItem="8oP-Ad-EMI" secondAttribute="bottom" constant="20" id="3ek-fg-j0l"/>
                             <constraint firstItem="Mo8-DY-qha" firstAttribute="leading" secondItem="exm-u1-QzJ" secondAttribute="trailing" id="5fz-b8-s8q"/>
+                            <constraint firstAttribute="trailing" secondItem="qhJ-dU-d6L" secondAttribute="trailing" constant="20" symbolic="YES" id="73p-qL-72q"/>
                             <constraint firstItem="UVV-Pp-jYj" firstAttribute="baseline" secondItem="tWO-oY-bil" secondAttribute="baseline" id="BPB-AE-ci2"/>
                             <constraint firstItem="exm-u1-QzJ" firstAttribute="leading" secondItem="tWO-oY-bil" secondAttribute="trailing" id="BdW-ML-Wgo"/>
                             <constraint firstItem="nlE-LG-gFJ" firstAttribute="baseline" secondItem="APD-9k-016" secondAttribute="baseline" id="DJ7-hU-iEn"/>
@@ -837,7 +846,6 @@
                             <constraint firstItem="mta-BQ-zCK" firstAttribute="leading" secondItem="bVg-cu-15y" secondAttribute="leading" id="Rfl-D3-cdr"/>
                             <constraint firstItem="Ia3-tI-Tpf" firstAttribute="leading" secondItem="bVg-cu-15y" secondAttribute="leading" id="T0w-cT-RWd"/>
                             <constraint firstItem="UVV-Pp-jYj" firstAttribute="leading" secondItem="Ia3-tI-Tpf" secondAttribute="leading" id="TRx-0g-UaS"/>
-                            <constraint firstAttribute="trailing" secondItem="Acy-n3-0fi" secondAttribute="trailing" constant="20" id="TpD-mK-mJn"/>
                             <constraint firstItem="Puu-o7-7qG" firstAttribute="top" secondItem="W9V-pc-Bc8" secondAttribute="bottom" constant="20" id="X1o-RL-Lb0"/>
                             <constraint firstItem="UVV-Pp-jYj" firstAttribute="top" secondItem="Puu-o7-7qG" secondAttribute="bottom" constant="8" symbolic="YES" id="Xsc-aR-oeF"/>
                             <constraint firstAttribute="trailing" secondItem="mta-BQ-zCK" secondAttribute="trailing" constant="20" id="Yxd-jk-7M5"/>
@@ -849,8 +857,10 @@
                             <constraint firstItem="tWO-oY-bil" firstAttribute="baseline" secondItem="exm-u1-QzJ" secondAttribute="baseline" id="fQc-wW-sL6"/>
                             <constraint firstItem="Puu-o7-7qG" firstAttribute="leading" secondItem="EZS-M7-yxg" secondAttribute="leading" constant="20" id="fqc-cn-TGz"/>
                             <constraint firstItem="UVV-Pp-jYj" firstAttribute="leading" secondItem="Puu-o7-7qG" secondAttribute="leading" id="fuB-zf-i0s"/>
+                            <constraint firstItem="qhJ-dU-d6L" firstAttribute="leading" secondItem="Acy-n3-0fi" secondAttribute="trailing" constant="8" symbolic="YES" id="isn-QK-8eP"/>
                             <constraint firstItem="nlE-LG-gFJ" firstAttribute="leading" secondItem="Mo8-DY-qha" secondAttribute="trailing" id="kgJ-Dl-8wE"/>
                             <constraint firstItem="APD-9k-016" firstAttribute="leading" secondItem="nlE-LG-gFJ" secondAttribute="trailing" id="qOc-ke-dxH"/>
+                            <constraint firstItem="qhJ-dU-d6L" firstAttribute="baseline" secondItem="Acy-n3-0fi" secondAttribute="baseline" id="tRC-dX-uDW"/>
                             <constraint firstItem="8oP-Ad-EMI" firstAttribute="leading" secondItem="Ia3-tI-Tpf" secondAttribute="trailing" id="tTX-7Z-aNy"/>
                             <constraint firstItem="nlE-LG-gFJ" firstAttribute="baseline" secondItem="Mo8-DY-qha" secondAttribute="baseline" id="tVd-wL-qgl"/>
                             <constraint firstItem="mta-BQ-zCK" firstAttribute="top" secondItem="bVg-cu-15y" secondAttribute="bottom" constant="8" symbolic="YES" id="wsQ-Na-sdG"/>
@@ -862,6 +872,7 @@
                         <outlet property="addQuestionButton" destination="Acy-n3-0fi" id="uPS-u8-kSK"/>
                         <outlet property="addToCalendarButton" destination="P2p-Fh-Dgq" id="BLi-qb-WAf"/>
                         <outlet property="candidateNameLabel" destination="yyB-II-iHc" id="z2f-jx-pCX"/>
+                        <outlet property="editQuestionsButton" destination="qhJ-dU-d6L" id="ZrA-DH-6CE"/>
                         <outlet property="endTimeLabel" destination="APD-9k-016" id="y47-up-KrG"/>
                         <outlet property="interviewDateLabel" destination="tWO-oY-bil" id="CGd-wk-Nlm"/>
                         <outlet property="locationField" destination="8oP-Ad-EMI" id="Fhu-1G-hL8"/>

@@ -151,6 +151,9 @@
 - (void)saveInterview
 {
     [self saveInterviewWithoutSavingToCalendar];
+    // FIXME: Should probably use self.interview.changes to get a list of the changes we care about.
+    // FIXME: This should probably be in Interview somewhere so that it happens no matter when we
+    //        save an interview.
     if (self.interview.eventIdentifier != nil) {
         EKEventStore *eventStore = [[EKEventStore alloc] init];
         EKEvent *event = [eventStore eventWithIdentifier:self.interview.eventIdentifier];
@@ -263,10 +266,9 @@
 
 - (void)editQuestions
 {
-    // Doesn't work yet
-    //    self.editing = !self.editing;
-    //    [self.editQuestionsButton setTitle:(self.editing ? @"Done" : @"Edit")
-    //                              forState:UIControlStateNormal | UIControlStateSelected | UIControlStateHighlighted | UIControlStateDisabled];
+//    [self.editQuestionsButton setTitle:(self.questionTable.editing ? @"Edit" : @"Done")
+//                              forState:UIControlStateNormal | UIControlStateSelected | UIControlStateHighlighted | UIControlStateDisabled];
+    [self.questionTable setEditing:!self.questionTable.editing animated:YES];
 }
 
 - (void)reloadDateLabel
@@ -423,22 +425,35 @@
         case UITableViewCellEditingStyleDelete:
             question = [self.sortedQuestions objectAtIndex:indexPath.row];
             [self.interview removeQuestionsObject:question];
-            [self saveInterview];
+            [self.interview.managedObjectContext deleteObject:question];
+            [self saveInterviewWithoutSavingToCalendar];
+            self.sortedQuestions = self.interview.sortedQuestions;
+            
             [self.questionTable deleteRowsAtIndexPaths:@[indexPath]
                                       withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
         default:
+            NSLog(@"Unable to handle editing style %d in question table", editingStyle);
             break;
     }
 }
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
+    // Swap the sort orders of the "from" and "to" questions.
+    Question *fromQuestion = [self.sortedQuestions objectAtIndex:fromIndexPath.row];
+    Question *toQuestion = [self.sortedQuestions objectAtIndex:toIndexPath.row];
+    NSNumber *oldFromSortOrder = fromQuestion.sortOrder;
+    fromQuestion.sortOrder = toQuestion.sortOrder;
+    toQuestion.sortOrder = oldFromSortOrder;
+    [self saveInterviewWithoutSavingToCalendar];
+    
+    self.sortedQuestions = self.interview.sortedQuestions;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return NO;
+    return YES;
 }
 
 #pragma mark - Split view
