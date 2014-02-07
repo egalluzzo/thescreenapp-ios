@@ -31,10 +31,9 @@
 
 @property (nonatomic, strong) UIPopoverController *masterPopoverController;
 @property (nonatomic, strong) UIPopoverController *datePopoverController;
-@property (nonatomic, strong) NSArray *sortedQuestions;
+@property (nonatomic, strong) QuestionTableViewDataSource *dataSource;
 
 - (void)configureView;
-- (void)configureQuestionCell:(UITableViewCell *)cell cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 - (void)addToCalendar;
 - (void)addQuestion;
@@ -71,11 +70,23 @@
     [self configureView];
 }
 
+// This doesn't seem to get initialized if I put it in init or initWithNibName.  If I put
+// it in viewDidLoad, setInterview gets called before it.  So I lazy-load it instead.
+- (QuestionTableViewDataSource *)dataSource
+{
+    if (_dataSource == nil) {
+        self.dataSource = [[QuestionTableViewDataSource alloc] initWithCellProvider:self];
+    }
+    return _dataSource;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     [self.navigationController.navigationBar useScreenAppTintColor];
+    
+    self.questionTable.dataSource = self.dataSource;
     
     [self.addToCalendarButton addTarget:self
                                  action:@selector(addToCalendar)
@@ -125,8 +136,8 @@
 {
     if (_interview != interview) {
         _interview = interview;
+        self.dataSource.interview = interview;
         [self configureView];
-        [self.questionTable reloadData];
     }
     
     if (self.masterPopoverController != nil) {
@@ -170,9 +181,8 @@
         self.locationField.text = self.interview.location;
         [self reloadDateLabel];
         
-        // Reload the interviews in case they have changed.
-        self.sortedQuestions = self.interview.sortedQuestions;
-        [self.questionTable reloadData];
+        // Reload the questions in case they have changed.
+        [self.dataSource reloadQuestions:self.questionTable];
     }
 }
 
@@ -251,17 +261,7 @@
 
 - (void)addQuestion
 {
-    Question *question = [NSEntityDescription insertNewObjectForEntityForName:@"Question"
-                                                       inManagedObjectContext:self.interview.managedObjectContext];
-    question.interview = self.interview;
-    [self.interview addQuestionsObject:question];
-    [self saveInterview];
-    
-    self.sortedQuestions = self.interview.sortedQuestions;
-    
-    NSInteger row = [self.sortedQuestions indexOfObject:question];
-    NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:row inSection:0];
-    [self.questionTable insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.dataSource addQuestion:self.questionTable];
 }
 
 - (void)editQuestions
@@ -362,28 +362,9 @@
                                               animated:YES];
 }
 
-#pragma mark - Table view data source
+#pragma mark - Table view data source cell provider
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // If we have no candidate, there are no sections.
-    if (self.interview == nil) {
-        return 0;
-    } else {
-        return 1;
-    }
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    if (self.interview) {
-        return self.sortedQuestions.count;
-    } else {
-        return 0;
-    }
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForQuestion:(Question *)question
 {
     TextFieldTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TextFieldTableViewCell"];
     if (cell == nil) {
@@ -398,62 +379,8 @@
         cell.textField.delegate = self;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    [self configureQuestionCell:cell cellForRowAtIndexPath:indexPath];
-    return cell;
-}
-
-- (void)configureQuestionCell:(TextFieldTableViewCell *)cell cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    Question *question = [self.sortedQuestions objectAtIndex:indexPath.row];
     cell.textField.text = question.question;
-}
-
--(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return UITableViewCellEditingStyleDelete;
-}
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return YES;
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    Question *question = nil;
-    switch (editingStyle) {
-        case UITableViewCellEditingStyleDelete:
-            question = [self.sortedQuestions objectAtIndex:indexPath.row];
-            [self.interview removeQuestionsObject:question];
-            [self.interview.managedObjectContext deleteObject:question];
-            [self saveInterviewWithoutSavingToCalendar];
-            self.sortedQuestions = self.interview.sortedQuestions;
-            
-            [self.questionTable deleteRowsAtIndexPaths:@[indexPath]
-                                      withRowAnimation:UITableViewRowAnimationAutomatic];
-            break;
-        default:
-            NSLog(@"Unable to handle editing style %d in question table", editingStyle);
-            break;
-    }
-}
-
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-    // Swap the sort orders of the "from" and "to" questions.
-    Question *fromQuestion = [self.sortedQuestions objectAtIndex:fromIndexPath.row];
-    Question *toQuestion = [self.sortedQuestions objectAtIndex:toIndexPath.row];
-    NSNumber *oldFromSortOrder = fromQuestion.sortOrder;
-    fromQuestion.sortOrder = toQuestion.sortOrder;
-    toQuestion.sortOrder = oldFromSortOrder;
-    [self saveInterviewWithoutSavingToCalendar];
-    
-    self.sortedQuestions = self.interview.sortedQuestions;
-}
-
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return YES;
+    return cell;
 }
 
 #pragma mark - Split view
@@ -490,9 +417,8 @@
 // See http://stackoverflow.com/questions/4375442/accessing-uitextfield-in-a-custom-uitableviewcell
 - (void) textFieldDidEndEditing:(UITextField *)textField
 {
-    // this should return you your current indexPath
-    NSIndexPath *indexPath = [self indexPathForQuestionTextField:textField];
-    Question *question = [self.sortedQuestions objectAtIndex:indexPath.row];
+    NSIndexPath *indexPath = [self indexPathForCellSubview:textField];
+    Question *question = [self.dataSource questionAtIndexPath:indexPath];
     question.question = textField.text;
     
     NSError *error;
@@ -505,22 +431,22 @@
 
 - (void) textFieldDidBeginEditing:(UITextField *)textField
 {
-    NSIndexPath *cellIndexPath = [self indexPathForQuestionTextField:textField];
+    NSIndexPath *cellIndexPath = [self indexPathForCellSubview:textField];
     [self.questionTable scrollToRowAtIndexPath:cellIndexPath
                           atScrollPosition:UITableViewScrollPositionMiddle
                                   animated:YES];
 }
 
-- (NSIndexPath *)indexPathForQuestionTextField:(UITextField *)textField
+- (NSIndexPath *)indexPathForCellSubview:(UIView *)subview
 {
-    UIView *view = [textField superview];
-    while (view != nil && ![view isKindOfClass:[TextFieldTableViewCell class]]) {
+    UIView *view = subview;
+    while (view != nil && ![view isKindOfClass:[UITableViewCell class]]) {
         view = [view superview];
     }
     if (view == nil) {
         return nil;
     } else {
-        return [self.questionTable indexPathForCell:(TextFieldTableViewCell *)view];
+        return [self.questionTable indexPathForCell:(UITableViewCell *)view];
     }
 }
 

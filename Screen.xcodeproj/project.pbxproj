@@ -38,6 +38,10 @@
 		070BBBDA1897FFEA0061F546 /* CandidateDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070BBBD91897FFEA0061F546 /* CandidateDetailViewController.m */; };
 		070BBBDD189802D00061F546 /* CandidateDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070BBBDC189802D00061F546 /* CandidateDetailTableViewController.m */; };
 		070BBBE5189AD3C10061F546 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 070BBBE4189AD3C10061F546 /* NSString+MD5.m */; };
+		07263CCD18A534BA00FEE8C4 /* ConductInterviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07263CCC18A534BA00FEE8C4 /* ConductInterviewViewController.m */; };
+		07263CD018A5420100FEE8C4 /* QuestionNotesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07263CCF18A5420100FEE8C4 /* QuestionNotesTableViewCell.m */; };
+		07263CD318A54AF900FEE8C4 /* QuestionTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 07263CD218A54AF900FEE8C4 /* QuestionTableViewDataSource.m */; };
+		0739939F18A4530E0006032A /* QuestionNotesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0739939E18A4530E0006032A /* QuestionNotesTableViewCell.xib */; };
 		07D6FF0B187B477500DEAF12 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07D6FF0A187B477500DEAF12 /* Images.xcassets */; };
 		07E0E6D5179AE9B000BB29C3 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E0E6D4179AE9B000BB29C3 /* CoreData.framework */; };
 		07E0E6D9179AEA5800BB29C3 /* Screen.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 07E0E6D7179AEA5800BB29C3 /* Screen.xcdatamodeld */; };
@@ -105,6 +109,13 @@
 		070BBBE3189AD3C10061F546 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+MD5.h"; path = "Utilities/NSString+MD5.h"; sourceTree = "<group>"; };
 		070BBBE4189AD3C10061F546 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+MD5.m"; path = "Utilities/NSString+MD5.m"; sourceTree = "<group>"; };
 		070BBBE6189AD7C80061F546 /* Screen 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Screen 3.xcdatamodel"; sourceTree = "<group>"; };
+		07263CCB18A534BA00FEE8C4 /* ConductInterviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConductInterviewViewController.h; path = Controller/ConductInterviewViewController.h; sourceTree = "<group>"; };
+		07263CCC18A534BA00FEE8C4 /* ConductInterviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConductInterviewViewController.m; path = Controller/ConductInterviewViewController.m; sourceTree = "<group>"; };
+		07263CCE18A5420100FEE8C4 /* QuestionNotesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QuestionNotesTableViewCell.h; path = View/QuestionNotesTableViewCell.h; sourceTree = "<group>"; };
+		07263CCF18A5420100FEE8C4 /* QuestionNotesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QuestionNotesTableViewCell.m; path = View/QuestionNotesTableViewCell.m; sourceTree = "<group>"; };
+		07263CD118A54AF900FEE8C4 /* QuestionTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QuestionTableViewDataSource.h; path = View/QuestionTableViewDataSource.h; sourceTree = "<group>"; };
+		07263CD218A54AF900FEE8C4 /* QuestionTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QuestionTableViewDataSource.m; path = View/QuestionTableViewDataSource.m; sourceTree = "<group>"; };
+		0739939E18A4530E0006032A /* QuestionNotesTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = QuestionNotesTableViewCell.xib; path = View/QuestionNotesTableViewCell.xib; sourceTree = "<group>"; };
 		07D6FF0A187B477500DEAF12 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		07E0E6D4179AE9B000BB29C3 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		07E0E6D8179AEA5800BB29C3 /* Screen.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Screen.xcdatamodel; sourceTree = "<group>"; };
@@ -118,7 +129,7 @@
 		07EBF015189C12E100AA9C26 /* InterviewDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InterviewDetailViewController.m; path = Controller/InterviewDetailViewController.m; sourceTree = "<group>"; };
 		07EBF017189FE03800AA9C26 /* UINavigationBar+TintSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UINavigationBar+TintSettings.h"; path = "Utilities/UINavigationBar+TintSettings.h"; sourceTree = "<group>"; };
 		07EBF018189FE03800AA9C26 /* UINavigationBar+TintSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UINavigationBar+TintSettings.m"; path = "Utilities/UINavigationBar+TintSettings.m"; sourceTree = "<group>"; };
-		07EBF01A18A2D25900AA9C26 /* Screen 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Screen 4.xcdatamodel"; sourceTree = "<group>"; };
+		07EBF01A18A2D25900AA9C26 /* Screen 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Screen 4.xcdatamodel"; sourceTree = "<group>"; };
 		9FA4E0DD17C09BDD005F0035 /* InterviewTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InterviewTableViewController.h; path = Controller/InterviewTableViewController.h; sourceTree = "<group>"; };
 		9FA4E0DE17C09BDD005F0035 /* InterviewTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InterviewTableViewController.m; path = Controller/InterviewTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -259,6 +270,8 @@
 		0700537C17860A16005D947E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				07263CD118A54AF900FEE8C4 /* QuestionTableViewDataSource.h */,
+				07263CD218A54AF900FEE8C4 /* QuestionTableViewDataSource.m */,
 				0700537A1785CCB1005D947E /* Images */,
 				0700533D1779D8A3005D947E /* MainStoryboard_iPhone.storyboard */,
 				070053401779D8A3005D947E /* MainStoryboard_iPad.storyboard */,
@@ -267,6 +280,9 @@
 				070455C317C5823200C42D19 /* TextFieldTableViewCell.h */,
 				070455C417C5823200C42D19 /* TextFieldTableViewCell.m */,
 				070455C617C582B300C42D19 /* TextFieldTableViewCell.xib */,
+				0739939E18A4530E0006032A /* QuestionNotesTableViewCell.xib */,
+				07263CCE18A5420100FEE8C4 /* QuestionNotesTableViewCell.h */,
+				07263CCF18A5420100FEE8C4 /* QuestionNotesTableViewCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -286,6 +302,8 @@
 				07EBF012189C12BC00AA9C26 /* InterviewDetailTableViewController.m */,
 				07EBF014189C12E100AA9C26 /* InterviewDetailViewController.h */,
 				07EBF015189C12E100AA9C26 /* InterviewDetailViewController.m */,
+				07263CCB18A534BA00FEE8C4 /* ConductInterviewViewController.h */,
+				07263CCC18A534BA00FEE8C4 /* ConductInterviewViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -387,6 +405,7 @@
 				0704557217BA689F00C42D19 /* 5starsgray.png in Resources */,
 				0704557417BA69BF00C42D19 /* 5starflip.png in Resources */,
 				070455C717C582B300C42D19 /* TextFieldTableViewCell.xib in Resources */,
+				0739939F18A4530E0006032A /* QuestionNotesTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,12 +447,15 @@
 				07E0E6DC179AEDCC00BB29C3 /* Candidate.m in Sources */,
 				07E0E6E1179B293500BB29C3 /* CandidateTableViewController.m in Sources */,
 				0704557017B986C500C42D19 /* StarRatingView.m in Sources */,
+				07263CD318A54AF900FEE8C4 /* QuestionTableViewDataSource.m in Sources */,
 				07EBF019189FE03800AA9C26 /* UINavigationBar+TintSettings.m in Sources */,
 				070BBBE5189AD3C10061F546 /* NSString+MD5.m in Sources */,
+				07263CD018A5420100FEE8C4 /* QuestionNotesTableViewCell.m in Sources */,
 				070455BB17C041D800C42D19 /* Question.m in Sources */,
 				070455BE17C041D800C42D19 /* Interview.m in Sources */,
 				9FA4E0DF17C09BDD005F0035 /* InterviewTableViewController.m in Sources */,
 				070455C517C5823200C42D19 /* TextFieldTableViewCell.m in Sources */,
+				07263CCD18A534BA00FEE8C4 /* ConductInterviewViewController.m in Sources */,
 				070BBBDD189802D00061F546 /* CandidateDetailTableViewController.m in Sources */,
 				07EBF016189C12E100AA9C26 /* InterviewDetailViewController.m in Sources */,
 				070BBBDA1897FFEA0061F546 /* CandidateDetailViewController.m in Sources */,
