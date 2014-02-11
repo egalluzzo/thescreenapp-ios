@@ -275,9 +275,10 @@
 
 - (void)editQuestions
 {
-//    [self.editQuestionsButton setTitle:(self.questionTable.editing ? @"Edit" : @"Done")
-//                              forState:UIControlStateNormal | UIControlStateSelected | UIControlStateHighlighted | UIControlStateDisabled];
-    [self.questionTable setEditing:!self.questionTable.editing animated:YES];
+    BOOL newEditing = !self.questionTable.editing;
+    [self.editQuestionsButton setTitle:(newEditing ? @"Done" : @"Edit")
+                              forState:UIControlStateNormal];
+    [self.questionTable setEditing:newEditing animated:YES];
 }
 
 - (void)reloadDateLabel

@@ -63,6 +63,8 @@
     [self.finishInterviewButton addTarget:self
                                    action:@selector(finishInterview)
                          forControlEvents:UIControlEventTouchUpInside];
+    
+    [self configureView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -110,9 +112,10 @@
 
 - (void)editQuestions
 {
-    //    [self.editQuestionsButton setTitle:(self.questionTable.editing ? @"Edit Questions" : @"Done Editing")
-    //                              forState:UIControlStateNormal | UIControlStateSelected | UIControlStateHighlighted | UIControlStateDisabled];
-    [self.questionTable setEditing:!self.questionTable.editing animated:YES];
+    BOOL newEditing = !self.questionTable.editing;
+    [self.editQuestionsButton setTitle:(newEditing ? @"Done Editing" : @"Edit List")
+                                 forState:UIControlStateNormal];
+    [self.questionTable setEditing:newEditing animated:YES];
 }
 
 - (void)saveQuestion:(Question *)question
