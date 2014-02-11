@@ -16,5 +16,6 @@
 @property(nonatomic, strong) Interview *interview;
 
 -(void)saveInterview;
+-(void)conductInterview;
 
 @end

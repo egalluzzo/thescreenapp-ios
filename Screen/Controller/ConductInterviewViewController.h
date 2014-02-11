@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ConductInterviewViewController : UIViewController
+#import "QuestionTableViewDataSource.h"
+
+@interface ConductInterviewViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate,UITableViewDelegate, QuestionTableViewDataSourceCellProvider>
+
+@property (nonatomic, strong) Interview *interview;
 
 @end

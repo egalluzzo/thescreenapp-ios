@@ -21,48 +21,35 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="159"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="apm-Qg-u5o">
-                        <rect key="frame" x="20" y="8" width="280" height="143"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Question" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5KJ-BA-mJL">
-                                <rect key="frame" x="4" y="4" width="272" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OGR-nT-DZU">
-                                <rect key="frame" x="0.0" y="24" width="280" height="115"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="5KJ-BA-mJL" firstAttribute="leading" secondItem="apm-Qg-u5o" secondAttribute="leading" constant="4" id="VWw-bF-6xR"/>
-                            <constraint firstItem="OGR-nT-DZU" firstAttribute="leading" secondItem="apm-Qg-u5o" secondAttribute="leading" id="W4p-IX-l9m"/>
-                            <constraint firstAttribute="trailing" secondItem="OGR-nT-DZU" secondAttribute="trailing" id="f2S-sT-TF4"/>
-                            <constraint firstAttribute="trailing" secondItem="5KJ-BA-mJL" secondAttribute="trailing" constant="4" id="fbd-x9-pKM"/>
-                            <constraint firstAttribute="bottom" secondItem="OGR-nT-DZU" secondAttribute="bottom" constant="4" id="fws-0m-j1Y"/>
-                            <constraint firstItem="OGR-nT-DZU" firstAttribute="top" secondItem="5KJ-BA-mJL" secondAttribute="bottom" constant="3" id="iph-bE-Hi4"/>
-                            <constraint firstItem="5KJ-BA-mJL" firstAttribute="top" secondItem="apm-Qg-u5o" secondAttribute="top" constant="4" id="qwZ-3I-SLe"/>
-                        </constraints>
-                    </view>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Question" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7LD-RO-BoW">
+                        <rect key="frame" x="4" y="4" width="312" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CU5-P5-P62">
+                        <rect key="frame" x="0.0" y="29" width="316" height="126"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
+                    </textView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="apm-Qg-u5o" firstAttribute="top" secondItem="jUW-Gt-zBs" secondAttribute="top" constant="8" id="YAy-Px-Oqp"/>
-                    <constraint firstAttribute="bottom" secondItem="apm-Qg-u5o" secondAttribute="bottom" constant="8" id="hiY-mQ-hC6"/>
-                    <constraint firstAttribute="trailing" secondItem="apm-Qg-u5o" secondAttribute="trailing" constant="20" id="uII-WR-a9b"/>
-                    <constraint firstItem="apm-Qg-u5o" firstAttribute="leading" secondItem="jUW-Gt-zBs" secondAttribute="leading" constant="20" id="wg1-hG-KgJ"/>
+                    <constraint firstItem="7LD-RO-BoW" firstAttribute="top" secondItem="jUW-Gt-zBs" secondAttribute="top" constant="4" id="08N-6Y-f1V"/>
+                    <constraint firstAttribute="bottom" secondItem="CU5-P5-P62" secondAttribute="bottom" constant="4" id="AZL-lO-SOv"/>
+                    <constraint firstItem="CU5-P5-P62" firstAttribute="leading" secondItem="jUW-Gt-zBs" secondAttribute="leading" id="NhG-Rd-k6R"/>
+                    <constraint firstItem="7LD-RO-BoW" firstAttribute="leading" secondItem="jUW-Gt-zBs" secondAttribute="leading" constant="4" id="T9o-ce-TJa"/>
+                    <constraint firstAttribute="trailing" secondItem="7LD-RO-BoW" secondAttribute="trailing" constant="4" id="TpR-Fd-u29"/>
+                    <constraint firstItem="CU5-P5-P62" firstAttribute="top" secondItem="7LD-RO-BoW" secondAttribute="bottom" constant="4" id="ou7-qt-DAT"/>
+                    <constraint firstAttribute="trailing" secondItem="CU5-P5-P62" secondAttribute="trailing" constant="4" id="rh2-YR-ij6"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="backgroundView" destination="apm-Qg-u5o" id="zgB-09-4hV"/>
-                <outlet property="notesField" destination="OGR-nT-DZU" id="Thc-Mm-i7A"/>
-                <outlet property="questionField" destination="5KJ-BA-mJL" id="QdD-Ow-4OQ"/>
+                <outlet property="notesField" destination="CU5-P5-P62" id="M3w-Mf-0ny"/>
+                <outlet property="questionField" destination="7LD-RO-BoW" id="SlU-fI-IOj"/>
             </connections>
         </tableViewCell>
     </objects>

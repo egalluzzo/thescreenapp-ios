@@ -11,6 +11,7 @@
 #import "InterviewDetailViewController.h"
 
 #import "Candidate.h"
+#import "ConductInterviewViewController.h"
 #import "Question.h"
 #import "TextFieldTableViewCell.h"
 #import "UINavigationBar+TintSettings.h"
@@ -24,11 +25,13 @@
 @property (nonatomic, weak) IBOutlet UILabel *endTimeLabel;
 @property (nonatomic, weak) IBOutlet UITextField *locationField;
 @property (nonatomic, weak) IBOutlet UIButton *addToCalendarButton;
+@property (nonatomic, weak) IBOutlet UIButton *conductInterviewButton;
 
 @property (nonatomic, weak) IBOutlet UIButton *addQuestionButton;
 @property (nonatomic, weak) IBOutlet UIButton *editQuestionsButton;
 @property (nonatomic, weak) IBOutlet UITableView *questionTable;
 
+@property (nonatomic, strong) ConductInterviewViewController *conductInterviewViewController;
 @property (nonatomic, strong) UIPopoverController *masterPopoverController;
 @property (nonatomic, strong) UIPopoverController *datePopoverController;
 @property (nonatomic, strong) QuestionTableViewDataSource *dataSource;
@@ -84,6 +87,8 @@
 {
     [super viewDidLoad];
     
+    self.conductInterviewViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ConductInterviewViewController"];
+    
     [self.navigationController.navigationBar useScreenAppTintColor];
     
     self.questionTable.dataSource = self.dataSource;
@@ -91,6 +96,10 @@
     [self.addToCalendarButton addTarget:self
                                  action:@selector(addToCalendar)
                        forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.conductInterviewButton addTarget:self
+                                    action:@selector(conductInterview)
+                          forControlEvents:UIControlEventTouchUpInside];
     
     [self.addQuestionButton addTarget:self
                                action:@selector(addQuestion)
@@ -360,6 +369,14 @@
                                                 inView:self.view
                               permittedArrowDirections:UIPopoverArrowDirectionAny
                                               animated:YES];
+}
+
+- (void)conductInterview
+{
+    if (self.interview != nil) {
+        self.conductInterviewViewController.interview = self.interview;
+        [self.navigationController presentViewController:self.conductInterviewViewController animated:YES completion:nil];
+    }
 }
 
 #pragma mark - Table view data source cell provider

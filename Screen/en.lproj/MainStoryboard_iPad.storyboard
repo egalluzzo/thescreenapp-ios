@@ -803,6 +803,13 @@
                                 </constraints>
                                 <state key="normal" title="Edit"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0gn-HZ-Qkd">
+                                <rect key="frame" x="593" y="117" width="155" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Conduct Interview">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -811,6 +818,7 @@
                             <constraint firstItem="yyB-II-iHc" firstAttribute="leading" secondItem="Puu-o7-7qG" secondAttribute="trailing" id="1sW-I0-VYe"/>
                             <constraint firstItem="P2p-Fh-Dgq" firstAttribute="leading" secondItem="Acy-n3-0fi" secondAttribute="leading" id="2ys-ys-Ofi"/>
                             <constraint firstItem="bVg-cu-15y" firstAttribute="top" secondItem="8oP-Ad-EMI" secondAttribute="bottom" constant="20" id="3ek-fg-j0l"/>
+                            <constraint firstItem="P2p-Fh-Dgq" firstAttribute="width" secondItem="0gn-HZ-Qkd" secondAttribute="width" id="3o2-YQ-trn"/>
                             <constraint firstItem="Mo8-DY-qha" firstAttribute="leading" secondItem="exm-u1-QzJ" secondAttribute="trailing" id="5fz-b8-s8q"/>
                             <constraint firstAttribute="trailing" secondItem="qhJ-dU-d6L" secondAttribute="trailing" constant="20" symbolic="YES" id="73p-qL-72q"/>
                             <constraint firstItem="UVV-Pp-jYj" firstAttribute="baseline" secondItem="tWO-oY-bil" secondAttribute="baseline" id="BPB-AE-ci2"/>
@@ -828,11 +836,13 @@
                             <constraint firstItem="tWO-oY-bil" firstAttribute="leading" secondItem="UVV-Pp-jYj" secondAttribute="trailing" id="cvE-Cg-HQz"/>
                             <constraint firstAttribute="trailing" secondItem="P2p-Fh-Dgq" secondAttribute="trailing" constant="20" id="dUt-lg-2Fs"/>
                             <constraint firstItem="yyB-II-iHc" firstAttribute="baseline" secondItem="Puu-o7-7qG" secondAttribute="baseline" id="daM-Os-Ca1"/>
+                            <constraint firstItem="P2p-Fh-Dgq" firstAttribute="trailing" secondItem="0gn-HZ-Qkd" secondAttribute="trailing" id="dal-YH-e1o"/>
                             <constraint firstItem="P2p-Fh-Dgq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="yyB-II-iHc" secondAttribute="trailing" constant="8" symbolic="YES" id="eW3-Ee-1gp"/>
                             <constraint firstItem="tWO-oY-bil" firstAttribute="baseline" secondItem="exm-u1-QzJ" secondAttribute="baseline" id="fQc-wW-sL6"/>
                             <constraint firstItem="Puu-o7-7qG" firstAttribute="leading" secondItem="EZS-M7-yxg" secondAttribute="leading" constant="20" id="fqc-cn-TGz"/>
                             <constraint firstItem="UVV-Pp-jYj" firstAttribute="leading" secondItem="Puu-o7-7qG" secondAttribute="leading" id="fuB-zf-i0s"/>
                             <constraint firstItem="qhJ-dU-d6L" firstAttribute="leading" secondItem="Acy-n3-0fi" secondAttribute="trailing" constant="8" symbolic="YES" id="isn-QK-8eP"/>
+                            <constraint firstItem="UVV-Pp-jYj" firstAttribute="baseline" secondItem="0gn-HZ-Qkd" secondAttribute="baseline" id="jai-vB-nlX"/>
                             <constraint firstItem="nlE-LG-gFJ" firstAttribute="leading" secondItem="Mo8-DY-qha" secondAttribute="trailing" id="kgJ-Dl-8wE"/>
                             <constraint firstItem="APD-9k-016" firstAttribute="leading" secondItem="nlE-LG-gFJ" secondAttribute="trailing" id="qOc-ke-dxH"/>
                             <constraint firstItem="qhJ-dU-d6L" firstAttribute="baseline" secondItem="Acy-n3-0fi" secondAttribute="baseline" id="tRC-dX-uDW"/>
@@ -847,6 +857,7 @@
                         <outlet property="addQuestionButton" destination="Acy-n3-0fi" id="uPS-u8-kSK"/>
                         <outlet property="addToCalendarButton" destination="P2p-Fh-Dgq" id="BLi-qb-WAf"/>
                         <outlet property="candidateNameLabel" destination="yyB-II-iHc" id="z2f-jx-pCX"/>
+                        <outlet property="conductInterviewButton" destination="0gn-HZ-Qkd" id="s2X-NQ-PiX"/>
                         <outlet property="editQuestionsButton" destination="qhJ-dU-d6L" id="ZrA-DH-6CE"/>
                         <outlet property="endTimeLabel" destination="APD-9k-016" id="y47-up-KrG"/>
                         <outlet property="interviewDateLabel" destination="tWO-oY-bil" id="CGd-wk-Nlm"/>
@@ -924,7 +935,11 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addQuestionButton" destination="JTd-Bz-iFl" id="t0l-X6-CJT"/>
+                        <outlet property="candidateNameLabel" destination="w75-sM-pab" id="d4Y-3T-3MK"/>
                         <outlet property="editQuestionsButton" destination="YJU-PB-KKR" id="6Vi-bY-9kV"/>
+                        <outlet property="finishInterviewButton" destination="D4f-a2-dqp" id="Dwy-8n-HTO"/>
+                        <outlet property="questionTable" destination="INT-Fn-QCO" id="Acz-fm-iWq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kc5-q7-OgN" userLabel="First Responder" sceneMemberID="firstResponder"/>
