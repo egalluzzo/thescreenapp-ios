@@ -447,14 +447,6 @@
     }
 }
 
-- (void) textFieldDidBeginEditing:(UITextField *)textField
-{
-    NSIndexPath *cellIndexPath = [self indexPathForCellSubview:textField];
-    [self.questionTable scrollToRowAtIndexPath:cellIndexPath
-                          atScrollPosition:UITableViewScrollPositionMiddle
-                                  animated:YES];
-}
-
 - (NSIndexPath *)indexPathForCellSubview:(UIView *)subview
 {
     UIView *view = subview;

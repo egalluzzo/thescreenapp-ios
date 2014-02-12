@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>40B544CD-C911-459E-B982-96816941C490</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Screen</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>D085FCC6-CD61-477E-AD6D-1FD9DAA03F50</key>
+		<string>ssh://github.com/egalluzzo/thescreenapp-ios.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Screen.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>D085FCC6-CD61-477E-AD6D-1FD9DAA03F50</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/egalluzzo/thescreenapp-ios.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D085FCC6-CD61-477E-AD6D-1FD9DAA03F50</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D085FCC6-CD61-477E-AD6D-1FD9DAA03F50</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Screen</string>
+		</dict>
+	</array>
+</dict>
+</plist>

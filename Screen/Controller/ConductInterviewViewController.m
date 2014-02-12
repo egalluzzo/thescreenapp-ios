@@ -156,14 +156,6 @@
 // The trouble is that it uses private variables like questionTable -- this isn't a
 // UITableViewController.  Perhaps it could be a special UIViewController subclass or something.
 
-- (void) textFieldDidBeginEditing:(UITextField *)textField
-{
-    NSIndexPath *cellIndexPath = [self indexPathForCellSubview:textField];
-    [self.questionTable scrollToRowAtIndexPath:cellIndexPath
-                              atScrollPosition:UITableViewScrollPositionMiddle
-                                      animated:YES];
-}
-
 // See http://stackoverflow.com/questions/4375442/accessing-uitextfield-in-a-custom-uitableviewcell
 - (void) textFieldDidEndEditing:(UITextField *)textField
 {
@@ -187,14 +179,6 @@
 }
 
 #pragma mark - Text view delegate
-
-- (void)textViewDidBeginEditing:(UITextView *)textView
-{
-    NSIndexPath *cellIndexPath = [self indexPathForCellSubview:textView];
-    [self.questionTable scrollToRowAtIndexPath:cellIndexPath
-                              atScrollPosition:UITableViewScrollPositionMiddle
-                                      animated:YES];
-}
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
