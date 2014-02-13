@@ -11,23 +11,9 @@
 
 @implementation Question
 
-@dynamic creationDate;
-@dynamic uuid;
 @dynamic question;
 @dynamic notes;
 @dynamic sortOrder;
 @dynamic interview;
-
-- (void)awakeFromInsert
-{
-    [super awakeFromInsert];
-    
-    self.creationDate = [NSDate date];
-    
-    // Create a new UUID.
-    CFUUIDRef uuidObj = CFUUIDCreate(nil);
-    // Convert to a CFStringRef, then an NSString *.
-    self.uuid = (NSString *)CFBridgingRelease(CFUUIDCreateString(nil, uuidObj));
-}
 
 @end

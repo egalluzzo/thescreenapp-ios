@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="3" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13A603" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="4" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13B42" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Candidate" representedClassName="Candidate" syncable="YES">
         <attribute name="creationDate" attributeType="Date" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
@@ -29,8 +29,8 @@
         <relationship name="interview" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Interview" inverseName="questions" inverseEntity="Interview" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Candidate" positionX="0" positionY="0" width="128" height="163"/>
-        <element name="Interview" positionX="169" positionY="15" width="128" height="163"/>
-        <element name="Question" positionX="342" positionY="45" width="128" height="133"/>
+        <element name="Candidate" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Interview" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Question" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

@@ -11,26 +11,12 @@
 
 @implementation Candidate
 
-@dynamic creationDate;
 @dynamic firstName;
 @dynamic lastName;
 @dynamic phone;
 @dynamic email;
 @dynamic rating;
-@dynamic uuid;
 @dynamic interviews;
-
-- (void)awakeFromInsert
-{
-    [super awakeFromInsert];
-    
-    self.creationDate = [NSDate date];
-    
-    // Create a new UUID.
-    CFUUIDRef uuidObj = CFUUIDCreate(nil);
-    // Convert to a CFStringRef, then an NSString *.
-    self.uuid = (NSString *)CFBridgingRelease(CFUUIDCreateString(nil, uuidObj));
-}
 
 - (NSString *)fullName
 {

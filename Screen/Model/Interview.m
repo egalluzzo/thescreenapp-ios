@@ -20,8 +20,6 @@
 
 @implementation Interview
 
-@dynamic creationDate;
-@dynamic uuid;
 @dynamic location;
 @dynamic interviewDate;
 @dynamic durationInMinutes;
@@ -33,13 +31,8 @@
 {
     [super awakeFromInsert];
     
-    self.creationDate = [NSDate date];
     self.location = @"";
     self.interviewDate = self.creationDate;
-    // Create a new UUID.
-    CFUUIDRef uuidObj = CFUUIDCreate(nil);
-    // Convert to a CFStringRef, then an NSString *.
-    self.uuid = (NSString *)CFBridgingRelease(CFUUIDCreateString(nil, uuidObj));
 }
 
 - (void)awakeFromFetch

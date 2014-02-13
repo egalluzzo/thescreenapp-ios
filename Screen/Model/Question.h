@@ -9,12 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+#import "ScreenModelObject.h"
+
 @class Interview;
 
-@interface Question : NSManagedObject
+@interface Question : ScreenModelObject
 
-@property (nonatomic, retain) NSDate *creationDate;
-@property (nonatomic, retain) NSString *uuid;
 @property (nonatomic, retain) NSString *question;
 @property (nonatomic, retain) NSString *notes;
 @property (nonatomic, retain) NSNumber *sortOrder;
